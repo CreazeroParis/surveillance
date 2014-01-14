@@ -1,0 +1,21 @@
+%h3= question.title
+%table.table.table-striped.table-bordered.table-rounded
+  %thead
+    %tr
+      %th
+      - question.options.each do |option|
+        %th
+          = option.title
+
+  %tbody
+    - question.questions.each do |sub_question|
+      %tr.control-group
+        %td
+          %label.control-label
+            = sub_question.title
+        - question.options.each do |option|
+          %td
+            %label
+              - if question.field.attempt
+                - answer = question.field.attempt.answers.find { |answer| answer.options.include?(option) && answer.question == sub_question }
+                = answer ? "V" : "-"

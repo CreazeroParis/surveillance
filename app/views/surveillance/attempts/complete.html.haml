@@ -1,0 +1,15 @@
+.sub-header
+.zone1-question-quizz
+  .titre
+    = @survey.title
+
+.zone-contenu.inside-shadow
+  .zone-quizz
+    .description.bloc
+      = @survey.last_page_description.html_safe
+
+    .form-actions
+      = link_to surveys_path, class: "btn btn-orange" do
+        Retour aux sondages
+
+.under-content-cache

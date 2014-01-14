@@ -1,0 +1,14 @@
+.list-item.survey-container
+  .list-item-inner
+    .name.pull-left.padding5
+      = survey.title
+
+    .btn-group.pull-right
+      - if (count = survey.attempts.count) > 0
+        = link_to "Voir les #{survey.attempts.count} réponses", admin_survey_attempts_path(survey), class: "btn btn-"
+      - else
+        .btn.delete-btn Aucune réponse
+      = link_to "Supprimer", admin_survey_path(survey), class: "btn btn-danger delete-btn", method: 'delete'
+      = link_to "Modifier", edit_admin_survey_path(survey), class: "btn"
+
+    .clearfix

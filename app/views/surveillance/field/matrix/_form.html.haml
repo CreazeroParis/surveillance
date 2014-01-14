@@ -1,0 +1,27 @@
+.control-group
+  %label.control-label{ required: question.mandatory }
+    = "*" if question.mandatory
+    = question.title
+
+
+  .controls
+    %table.table.table-striped.table-bordered.table-rounded
+      %thead
+        %tr
+          %th
+          - question.options.each do |option|
+            %th
+              = option.title
+
+      %tbody
+        - question.questions.each do |sub_question|
+          = f.fields_for :answers, (sub_question.field.answer_or_initialize_for(f.object)) do |fa|
+            %tr.control-group{ class: ("error" if fa.object.errors.any?), data: { "sub-question-id" => sub_question.id } }
+              %td
+                %label.control-label
+                  = sub_question.title
+                = fa.hidden_field :question_id, value: sub_question.id if fa.object.new_record?
+              - question.options.each do |option|
+                %td
+                  %label
+                    = fa.radio_button :option_id, option.id

@@ -1,0 +1,7 @@
+%h2
+  Ajouter un option pour la question
+  %strong
+    = surround '"' do
+      = question.title
+
+= render partial: 'form', locals: { path: admin_question_options_path(question) }

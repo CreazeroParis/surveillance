@@ -1,0 +1,6 @@
+%fieldset.matrix-question
+  = f.input :title, as: :string, label: "" do
+    = f.text_field :title
+
+    = f.hidden_field :_destroy, data: { destroy: true }
+    = link_to "Supprimer", "#", class: "btn btn-danger", data: { "destroy-field" => true }

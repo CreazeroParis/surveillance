@@ -1,0 +1,9 @@
+= f.fields_for :settings, question.settings.find_or_initialize_by_key(:other) do |fo|
+  - other = question.field.settings.other
+  .control-group
+    .controls
+      %label.checkbox
+        = fo.check_box :value
+        = other.admin_label
+
+  = fo.hidden_field :key, value: :other

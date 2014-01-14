@@ -1,0 +1,113 @@
+fr:
+  flashes:
+    surveillance/admin/surveys:
+      create:
+        success: "La questionnaire a bien été créée"
+        error: "La questionnaire n'a pu être créée"
+      update:
+        success: "Le questionnaire a bien été mis à jour"
+        error: "Le questionnaire n'a pu être mis à jour"
+      destroy:
+        success: "Le questionnaire a bien été supprimé"
+        confirm_message: "Voulez-vous vraiment supprimer ce questionnaire ?"
+
+    surveillance/admin/sections:
+      create:
+        success: "La section a bien été créée"
+        error: "La section n'a pu être créée"
+      update:
+        success: "La section a bien été mise à jour"
+        error: "La section n'a pu être mise à jour"
+      destroy:
+        success: "La section a bien été supprimée"
+      sort:
+        success: "Les sections ont bien été réordonnés"
+
+    surveillance/admin/questions:
+      create:
+        success: "La question a bien été créée"
+        error: "La question n'a pu être créée"
+      update:
+        success: "La question a bien été mise à jour"
+        error: "La question n'a pu être mise à jour"
+      edit_rules:
+        success: "Les actions conditionnelles de la question ont bien été mises à jour"
+        error: "Les actions conditionnelles de la question n'ont pu être mises à jour"
+      destroy:
+        success: "La question a bien été supprimée"
+      sort:
+        success: "Les questions ont bien été réordonnés"
+
+    surveillance/admin/options:
+      create:
+        success: "L'option a bien été créée"
+        error: "L'option n'a pu être créée"
+      update:
+        success: "L'option a bien été mise à jour"
+        error: "L'option n'a pu être mise à jour"
+      destroy:
+        success: "L'option a bien été supprimée"
+      sort:
+        success: "Les options ont bien été réordonnés"
+
+  surveillance:
+    field_types:
+      text: "Champ texte"
+      text_area: "Zone de texte multiligne"
+      single_choice: "Choix unique"
+      multiple_choices: "Choix multiples"
+      matrix: "Matrice"
+      multiple_choices_matrix: "Matrice à choix multiples"
+      order: "Ordonner les réponses"
+      number: "Nombre"
+    field:
+      errors:
+        not_present: must be filled
+    settings:
+      single_choice:
+        other:
+          admin: "Ajouter un champ autre ?"
+          field: "Autre"
+      multiple_choice:
+        other:
+          admin: "Ajouter un champ autre ?"
+          field: "Autre"
+    branch_actions:
+      goto_section: "Aller à la section"
+      finalize_survey: "Finaliser le questionnaire"
+    branch_conditions:
+      answers: "répond à la question"
+      doesnt_answer: "ne répond pas à la question"
+      answers_option: "choisi la réponse"
+      doesnt_answer_option: "ne choisi pas la réponse"
+
+  activerecord:
+    attributes:
+      surveillance/survey:
+        description: "Texte de présentation"
+        last_page_description: "Texte de fin du questionnaire"
+        end_date: "Date de fin"
+        published: "Publié ?"
+        title: "Titre"
+        sections_attributes: "Pages"
+        sections: "Pages"
+        project_id: "Projet"
+        featured_home: "Mettre sur la page d'accueil"
+        theme_id: "Mettre sur la page débats du thème"
+        authorize_public_attempts: "Autoriser les réponses de personnes non inscrites à la plateforme"
+      surveillance/section:
+        position: "Position"
+        survey_id: "Formulaire"
+        title: "Titre"
+      surveillance/question:
+        description: "Description"
+        mandatory: "Obligatoire ?"
+        section_id: "Page"
+        title: "Titre"
+        settings_attributes: "Paramètres"
+        field_type: "Type de question"
+      surveillance/branch_rule:
+        condition: "Si l'utilisateur"
+        action: "Alors"
+        section: "Page"
+        option: "Réponse"

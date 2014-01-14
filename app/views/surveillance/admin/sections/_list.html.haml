@@ -1,0 +1,7 @@
+.survey-sections
+  %h2
+    Sections
+
+  = link_to "Créer une section", new_admin_survey_section_path(survey), class: "btn btn-warning"
+  .sections-list
+    = render partial: "surveillance/admin/sections/section", collection: survey.sections

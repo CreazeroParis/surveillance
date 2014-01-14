@@ -1,0 +1,18 @@
+= f.fields_for :answers, question.field.answer_or_initialize do |fa|
+  = fa.input :option_ids, label: question.title, required: question.mandatory, hint: question.description do
+    = fa.collection_check_boxes :option_ids, question.options, :id, :title do |input|
+      - input.label class: "check_box" do
+        = input.check_box
+        = input.text
+
+    - if question.field.display_other_field?(question)
+      = fa.collection_check_boxes :option_ids, [question.field.other_option], :id, :title do |input|
+        - input.label class: "check_box" do
+          - input.instance_variable_set(:"@value", "other")
+          = input.check_box(checked: fa.object.other_choosed)
+          = input.text
+
+      = fa.fields_for :content, fa.object.content_or_build do |fc|
+        = fc.input :value, as: :string, label: false
+
+    = fa.hidden_field :question_id, value: question.id if fa.object.new_record?

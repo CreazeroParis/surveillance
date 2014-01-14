@@ -1,0 +1,4 @@
+%h3= question.title
+%ul
+  - question.options.each do |option|
+    %li.answer-count= "#{option.title} : #{option.answers.count}"

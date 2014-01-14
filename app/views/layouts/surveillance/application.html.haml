@@ -1,0 +1,10 @@
+!!! 5
+%html
+  %head
+    %title Surveillance
+    = stylesheet_link_tag    "surveillance/application", media: "all"
+    = javascript_include_tag "surveillance/application"
+    = csrf_meta_tags
+
+  %body
+    = yield

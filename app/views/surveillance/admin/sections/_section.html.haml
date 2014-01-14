@@ -1,0 +1,13 @@
+.list-item.survey-container{ data: { id: section.id } }
+  .list-item-inner
+    .name.pull-left.padding5
+      = section.title
+
+    .drag-handle.pull-right
+      %i.icon-resize-vertical
+
+    .btn-group.pull-right
+      = link_to "Supprimer", admin_section_path(section), class: "btn btn-danger delete-btn", method: 'delete'
+      = link_to "Modifier", edit_admin_section_path(section), class: "btn"
+
+    .clearfix

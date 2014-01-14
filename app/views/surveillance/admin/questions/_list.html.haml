@@ -1,0 +1,7 @@
+.project-survey-questions
+  %h2
+    Questions
+
+  = link_to "Créer une question", new_admin_section_question_path(section), class: "btn btn-warning"
+  .sections-list
+    = render partial: "surveillance/admin/questions/question", collection: section.questions

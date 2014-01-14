@@ -1,0 +1,25 @@
+.control-group
+  %label.control-label
+    = question.title
+
+  .controls
+    %table.table.table-striped.table-bordered.table-rounded
+      %thead
+        %tr
+          %th
+          - question.options.each do |option|
+            %th
+              = option.title
+
+      %tbody
+        - question.questions.each do |sub_question|
+          = f.fields_for :answers, (sub_question.field.answer_or_initialize_for(f.object)) do |fa|
+            %tr.control-group{ class: ("error" if fa.object.errors.any?), data: { "sub-question-id" => sub_question.id } }
+              %td
+                %label.control-label
+                  = sub_question.title
+                = fa.hidden_field :question_id, value: sub_question.id if fa.object.new_record?
+              - fa.collection_check_boxes :option_ids, question.options, :id, :title do |input|
+                %td.controls
+                  %label
+                    = input.check_box

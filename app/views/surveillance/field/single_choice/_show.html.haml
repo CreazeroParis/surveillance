@@ -1,0 +1,18 @@
+.question
+  %span.title
+    = question.title
+
+  %strong.answer
+    - if question.field.answer
+      - if question.field.answer.option
+        = question.field.answer.option.title
+      - elsif question.field.other_choosed?
+        = question.field.settings.other.label
+        \:
+        = question.field.answer_string
+      - else
+        Non répondu
+
+    - else
+      Non répondu
+

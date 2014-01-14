@@ -1,0 +1,7 @@
+%h2
+  Édition de la section
+  %strong
+    = surround '"' do
+      = section.title
+
+= render partial: 'form', locals: { path: admin_section_path(section) }

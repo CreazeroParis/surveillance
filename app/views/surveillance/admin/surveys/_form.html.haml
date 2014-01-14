@@ -1,0 +1,19 @@
+.survey-edit
+  = simple_form_for survey, url: path, html: { class: "form-horizontal glyph-form"} do |f|
+    = f.input :title
+    / = f.input :description, as: :rich, input_html: { rows: 5 }
+    = f.input :description, input_html: { rows: 5 }
+    = f.input :end_date, as: :string, class: "inline", input_html: { class: "date-warpper", value: survey.end_date && l(survey.end_date) }
+    = f.input :published
+
+    / = f.input :last_page_description, as: :rich, input_html: { rows: 5 }
+    = f.input :last_page_description, input_html: { rows: 5 }
+
+    .form-actions
+      = link_to admin_surveys_path, class: "btn btn-danger" do
+        Retour
+      %button.btn.btn-primary{ type: "submit" }
+        = survey.new_record? ? "Ajouter" : "Mettre à jour"
+
+  - unless survey.new_record?
+    = render partial: "surveillance/admin/sections/list"

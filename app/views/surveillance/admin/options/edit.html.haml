@@ -1,0 +1,7 @@
+%h2
+  Édition de l'option
+  %strong
+    = surround '"' do
+      = option.title
+
+= render partial: 'form', locals: { path: admin_option_path(option) }

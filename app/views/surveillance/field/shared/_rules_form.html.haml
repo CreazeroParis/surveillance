@@ -1,0 +1,19 @@
+%fieldset.question-branch-rule
+  = f.input :condition do
+    .pull-left
+      = f.select :condition, Surveillance.options_for(question.field.available_branch_conditions, "branch_conditions")
+    - if question.options.length > 0
+      .pull-left.answers-options-list
+        - if question.questions.length > 0
+          = f.input_field :sub_question_id, collection: question.questions
+        avec
+        = f.input_field :option_id, collection: question.field.options_list
+
+  = f.input :action do
+    .pull-left
+      = f.select :action, Surveillance.options_for(question.field.available_branch_actions, "branch_actions")
+    .pull-left.sections-list
+      = f.input_field :section_id, collection: question.survey.sections
+
+  = f.hidden_field :_destroy, data: { destroy: true }
+  = link_to "Supprimer", "#", class: "btn btn-danger", data: { "destroy-field" => true }

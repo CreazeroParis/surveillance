@@ -1,0 +1,8 @@
+.project-surveys
+  %h2
+    Sondages
+
+  = link_to "Créer un sondage", new_admin_survey_path, class: "btn btn-warning"
+
+  .surveys-list
+    = render partial: "survey", collection: surveys

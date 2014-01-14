@@ -1,0 +1,21 @@
+%h3= question.title
+%table
+  %thead
+    %tr
+      %th
+      - question.options.each do |option|
+        %th= option.title
+  %tbody
+    %tr
+      %td
+      - (0...question.questions.length).each do |index|
+        %td= "Position #{ index + 1 }"
+    - question.questions.each do |sub_question|
+      %tr
+        %td= sub_question.title
+        - sub_question.field.answers.each do |answers_count|
+          %td= answers_count || 0
+          
+
+
+          

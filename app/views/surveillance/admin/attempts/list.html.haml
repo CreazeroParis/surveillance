@@ -1,0 +1,11 @@
+= link_to "Retour à la liste des sondages", admin_project_surveys_path(@project), class: "btn btn-warning"
+%br
+%br
+- @attempts.each do |attempt|
+  .attempt
+    .title.pull-left
+      Répondu le :	  
+    %label.pull-left
+      = l(attempt.created_at)
+    = link_to "Voir les réponses", show_admin_survey_attempts_path(@survey, attempt), class: "btn pull-right"
+    .clear

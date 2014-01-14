@@ -1,0 +1,8 @@
+= simple_form_for option, url: path, html: { class: "form-horizontal "} do |f|
+  = f.input :title
+
+  = f.hidden_field :question_id, value: option.question_id || question.id
+
+  .form-actions
+    %button.btn.btn-primary{ type: "submit" }
+      = option.new_record? ? "Ajouter" : "Mettre à jour"

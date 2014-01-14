@@ -1,0 +1,21 @@
+.question
+  %span.title
+    = question.title
+
+  %strong.answer
+    - if question.field.answer
+      - if (has_options = question.field.answer.options.length > 0)
+        = question.field.answer.options.map(&:title).join(" / ")
+
+      - if (content = question.field.answer.content)
+        = " / " if has_options
+        = question.field.settings.other.label
+        \:
+        = question.field.answer_string
+
+      - unless has_options || content
+        Non répondu
+
+    - else
+      Non répondu
+

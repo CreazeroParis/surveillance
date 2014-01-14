@@ -1,0 +1,15 @@
+.sub-header
+.zone1
+	.bg-admin
+		.bloc
+			%h4
+				Votre participation a bien été prise en compte.
+
+			Votre participation au sondage
+			%strong= @survey.title
+			a bien été prise en compte.
+			%br
+			Nous vous remercions pour vos réponses.
+
+			= link_to surveys_path, class: "btn btn-orange" do
+				Retour aux sondages

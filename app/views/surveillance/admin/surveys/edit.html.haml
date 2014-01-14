@@ -1,0 +1,7 @@
+%h2
+  Édition du questionnaire
+  %strong
+    = surround '"' do
+      = survey.title
+
+= render partial: 'form', locals: { path: admin_survey_path(survey) }

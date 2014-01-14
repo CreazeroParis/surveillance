@@ -1,0 +1,38 @@
+= simple_form_for @attempt, url: survey_attempts_path, html: { class: "surveillance-attempt-form" } do |f|
+  = f.hidden_field :survey_id, value: @survey.id
+  .sub-header
+  .zone1-question-quizz
+    .titre
+      = @survey.title
+
+  .zone-contenu.inside-shadow
+    .zone-quizz
+      - if @survey.description.presence
+        .description.bloc
+          = @survey.description.html_safe
+
+      - @survey.sections.each_with_index do |section, index|
+        .surveillance-section{ style: ("display:none;" if index > 0), data: { id: section.id } }
+          .bloc
+            %h3
+              = section.title
+
+            - if section.description.presence
+              .section-description
+                = section.description.html_safe
+
+            - section.questions.each do |question|
+              = survey_field_for(f, question)
+
+          .form-actions
+            - if index > 0
+              %button.btn.btn-danger.back-to-previous-section{ type: "button" }
+                Retour à la page précédente
+
+            - if index < (@survey.sections.length - 1)
+              %button.btn.btn-primary.validate-section{ type: "button" }
+                Page suivante
+            - else
+              %button.btn.btn-primary.validate-survey{ type: "submit" }
+                Soumettre le questionnaire
+  .under-content-cache

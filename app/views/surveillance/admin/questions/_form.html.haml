@@ -1,0 +1,19 @@
+= simple_form_for question, url: path, html: { class: "form-horizontal "} do |f|
+  = f.input :field_type, collection: Surveillance::Field.field_types_enum
+
+  = f.input :title, input_html: { rows: 5 }
+
+  = f.input :mandatory
+
+  = f.input :description, hint: "Affiché en dessous de la question.", input_html: { rows: 5 }
+
+  = settings_fields_for(f, question)
+
+  .form-actions
+    %button.btn.btn-primary{ type: "submit" }
+      = question.new_record? ? "Ajouter" : "Mettre à jour"
+
+    = link_to "Retour", edit_admin_section_path(question.parent || section), class: "btn btn-danger"
+
+  - if question.persisted? && question.field.choosable?
+    = render partial: "surveillance/admin/options/list"

@@ -1,0 +1,16 @@
+= f.fields_for :answers, question.field.answer_or_initialize do |fa|
+  = fa.input :answer, label: question.title, required: question.mandatory, hint: question.description do
+    - question.options.each do |option|
+      %label.radio
+        = fa.radio_button :option_id, option.id
+        = option.title
+
+    - if question.field.display_other_field?(question)
+      %label.radio
+        = fa.radio_button :option_id, "other", checked: fa.object.other_choosed
+        = question.field.settings.other.label
+
+      = fa.fields_for :content, fa.object.content_or_build do |fc|
+        = fc.input :value, as: :string, label: false
+
+    = fa.hidden_field :question_id, value: question.id if fa.object.new_record?
