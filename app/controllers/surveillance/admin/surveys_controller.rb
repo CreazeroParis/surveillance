@@ -2,7 +2,7 @@ module Surveillance
   module Admin
     class SurveysController < ApplicationController
       expose(:surveys) { Surveillance::Survey.order("updated_at DESC") }
-      expose(:survey, attributes: :survey_params, model: :"surveillance/survey")
+      expose(:survey, attributes: :survey_params, model: Surveillance::Survey)
 
       def index
       end
@@ -38,7 +38,7 @@ module Surveillance
       protected
 
       def survey_params
-        params.require(:survey).permit!
+        stong_parameters? ? params.require(:survey).permit! : params[:survey]
       end
     end
   end

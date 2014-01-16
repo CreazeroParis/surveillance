@@ -1,6 +1,6 @@
 module Surveillance
   module Field
-    class Order < Surveillance::Field::Matrix
+    class Order < Matrix
       def choosable?
         false
       end

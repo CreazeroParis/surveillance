@@ -6,7 +6,8 @@ module Surveillance
       attr_accessor :question
       attr_writer :answer, :attempt
 
-      def initialize question, attempt: nil
+      def initialize question, options = {}
+        attempt = options.fetch(:attempt, nil)
         self.question = question
         self.attempt = attempt
       end
@@ -44,6 +45,10 @@ module Surveillance
 
       def has_sub_questions?
         false
+      end
+
+      def view_name
+        "question"
       end
 
       def settings

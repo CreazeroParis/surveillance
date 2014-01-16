@@ -4,6 +4,8 @@ class CreateSurveillanceBranchRules < ActiveRecord::Migration
     create_table :surveillance_branch_rules do |t|
       t.integer :question_id
       t.integer :sub_question_id
+      t.integer :option_id
+      t.integer :section_id
       t.string :condition
       t.string :action
 

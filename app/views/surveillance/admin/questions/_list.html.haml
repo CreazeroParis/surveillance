@@ -2,6 +2,6 @@
   %h2
     Questions
 
-  = link_to "Créer une question", new_admin_section_question_path(section), class: "btn btn-warning"
+  = link_to "Créer une question", new_admin_section_question_path(section), class: "btn btn-default"
   .sections-list
     = render partial: "surveillance/admin/questions/question", collection: section.questions

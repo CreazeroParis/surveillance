@@ -58,6 +58,7 @@ fr:
       multiple_choices: "Choix multiples"
       matrix: "Matrice"
       multiple_choices_matrix: "Matrice à choix multiples"
+      select_matrix: "Matrice de sélection"
       order: "Ordonner les réponses"
       number: "Nombre"
     field:

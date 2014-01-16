@@ -1,6 +1,6 @@
 module Surveillance
   module Field
-    class MatrixQuestion < Field::Base
+    class MatrixQuestion < Base
       def present?
         answer.option_ids.length > 0
       end

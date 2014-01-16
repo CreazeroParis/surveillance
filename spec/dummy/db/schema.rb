@@ -45,6 +45,8 @@ ActiveRecord::Schema.define(version: 20140113224550) do
   create_table "surveillance_branch_rules", force: true do |t|
     t.integer  "question_id"
     t.integer  "sub_question_id"
+    t.integer  "option_id"
+    t.integer  "section_id"
     t.string   "condition"
     t.string   "action"
     t.datetime "created_at"

@@ -12,7 +12,7 @@ module Surveillance
 
       content_tag :div, field, class: "surveillance-question", data: {
         "branch-rules" => branch_rules_for(question),
-        "matrix" => question.field.matrix?
+        "view" => question.field.view_name
       }
     end
 
@@ -41,11 +41,13 @@ module Surveillance
       }
     end
 
-    def link_to_add_fields label, target, builder: nil, relation: nil, **options
+    def link_to_add_fields label, target, options = {}
+      builder = options.fetch(:builder, nil)
+      relation = options.fetch(:relation, nil)
       # Get class name from builder's object class relations list
       class_name = builder.object.class.reflections[relation].class_name
       # Build new associated object
-      object = Surveillance.const_get(class_name).new
+      object = class_name.constantize.new
       id = object.object_id
 
       partial_path = options.delete(:partial) || "#{ relation }_fields"
@@ -60,6 +62,12 @@ module Surveillance
       link_to label, target, class: "btn btn-primary", data: {
         id: id, fields: fields.gsub("\n", ""), toggle: "new-field"
       }
+    end
+
+    def question_options_for_select question
+      options_for_select(
+        question.options.map { |option| [option.title, option.id] }
+      )
     end
   end
 end

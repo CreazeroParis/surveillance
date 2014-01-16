@@ -1,5 +1,5 @@
-.temp-project-top-padding.zone-contenu.inside-shadow#surveys
-  .boxes
-    - @surveys.each do |survey|
-      = render partial: "surveys/box", locals: { item: survey }
-.under-content-cache
+%h2
+  Sondages
+
+.surveys-container
+  = render partial: "surveillance/surveys/survey", collection: surveys

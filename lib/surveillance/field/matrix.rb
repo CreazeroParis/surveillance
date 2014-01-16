@@ -1,6 +1,6 @@
 module Surveillance
   module Field
-    class Matrix < Field::Base
+    class Matrix < Base
       def choosable?
         true
       end
@@ -15,6 +15,10 @@ module Surveillance
 
       def has_sub_questions?
         true
+      end
+
+      def view_name
+        "matrix"
       end
 
       def present?

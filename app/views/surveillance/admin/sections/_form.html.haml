@@ -4,9 +4,9 @@
   = f.input :description, input_html: { rows: 5 }
 
   .form-actions
-    = link_to edit_admin_survey_path(section.survey || survey), class: "btn btn-danger" do
+    = link_to edit_admin_survey_path(section.survey || survey), class: "btn btn-default" do
       Retour
-    %button.btn.btn-primary{ type: "submit" }
+    %button.btn.btn-danger{ type: "submit" }
       = section.new_record? ? "Ajouter" : "Mettre à jour"
 
 - unless section.new_record?

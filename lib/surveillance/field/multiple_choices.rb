@@ -1,6 +1,6 @@
 module Surveillance
   module Field
-    class MultipleChoices < Field::SingleChoice
+    class MultipleChoices < SingleChoice
       def options
         if display_other_field?(question)
           question.options + [ Option.new(id: "", title: settings.other.label) ]

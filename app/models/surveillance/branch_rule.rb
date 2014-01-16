@@ -16,8 +16,8 @@ module Surveillance
     end
 
     def as_json options = {}
-      attributes = %i(condition action)
-      attributes += %i(question_id section_id option_id).select do |id|
+      attributes = [:condition, :action]
+      attributes += [:question_id, :section_id, :option_id].select do |id|
         send(id).presence
       end
       super(only: attributes)

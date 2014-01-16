@@ -1,6 +1,6 @@
 module Surveillance
   module Field
-    class Text < Field::Base
+    class Text < Base
       def present?
         answer && answer.content
       end

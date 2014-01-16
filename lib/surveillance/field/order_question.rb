@@ -1,6 +1,6 @@
 module Surveillance
   module Field
-    class OrderQuestion < Field::Base
+    class OrderQuestion < Base
       def present?
         answer.content
       end

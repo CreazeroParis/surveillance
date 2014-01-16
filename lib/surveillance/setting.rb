@@ -2,11 +2,11 @@ module Surveillance
   class Setting
     attr_accessor :klass, :key, :type, :default
 
-    def initialize klass, key: nil, type: :string, default: nil
+    def initialize klass, options = {}
       self.klass = klass
-      self.key = key
-      self.type = type
-      self.default = default
+      self.key = options.fetch(:key, nil)
+      self.type = options.fetch(:type, :string)
+      self.default = options.fetch(:default, nil)
     end
 
     def label

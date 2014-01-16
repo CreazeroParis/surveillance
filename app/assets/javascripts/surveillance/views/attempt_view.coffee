@@ -15,8 +15,6 @@ class Surveillance.AttemptView extends Backbone.View
       view.nextSection = @nextFor(view)
       view.previousSection = @previousFor(view)
 
-    console.log @$el
-
   nextSection: (view) ->
     @transition(view, view.nextSection)
 

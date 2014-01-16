@@ -1,16 +1,16 @@
 .attempt
   %h2.title
     Questionnaire
-    = @attempt.survey.title
+    = attempt.survey.title
   .pull-right.date
     Répondu le
-    = l(@attempt.created_at)
+    = l(attempt.created_at)
 
-  - @attempt.survey.sections.each do |section|
+  - attempt.survey.sections.each do |section|
     %h3
       = section.title
 
     - section.questions.each do |question|
-      = survey_answer_for(@attempt, question)
+      = survey_answer_for(attempt, question)
 
-= link_to "Retour", admin_survey_attempts_path(@attempt.survey), class: "btn btn-warning"
+= link_to "Retour", admin_survey_attempts_path(attempt.survey), class: "btn btn-default"

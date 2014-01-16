@@ -1,9 +1,9 @@
 module Surveillance
   module Admin
     class OptionsController < ApplicationController
-      expose(:question,  model: "Surveillance::Question", finder_parameter: :question_id)
+      expose(:question,  model: Surveillance::Question, finder_parameter: :question_id)
       expose(:options) { question.options }
-      expose(:option,  model: "Surveillance::Option", attributes: :options_params)
+      expose(:option,  model: Surveillance::Option, attributes: :options_params)
 
       def create
         if option.save
@@ -37,7 +37,7 @@ module Surveillance
       protected
 
       def options_params
-        params.require(:option).permit!
+        stong_parameters? ? params.require(:option).permit! : params[:option]
       end
     end
   end

@@ -1,6 +1,6 @@
 module Surveillance
   module Field
-    class TextArea < Field::Text
+    class TextArea < Text
     end
   end
 end

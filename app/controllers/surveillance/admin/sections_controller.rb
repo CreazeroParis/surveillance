@@ -1,9 +1,9 @@
 module Surveillance
   module Admin
     class SectionsController < ApplicationController
-      expose(:survey, model: "Surveillance::Survey", finder_parameter: :survey_id)
+      expose(:survey, model: Surveillance::Survey, finder_parameter: :survey_id)
       expose(:sections) { survey.sections }
-      expose(:section,  model: "Surveillance::Section", attributes: :section_params)
+      expose(:section,  model: Surveillance::Section, attributes: :section_params)
 
       def index
       end
@@ -39,7 +39,7 @@ module Surveillance
       protected
 
       def section_params
-        params.require(:section).permit!
+        stong_parameters? ? params.require(:section).permit! : params[:section]
       end
     end
   end

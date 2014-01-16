@@ -1,10 +1,9 @@
 module Surveillance
   module Admin
     class AttemptsController < ApplicationController
-      load_and_authorize_resource :survey, class: "Surveillance::Survey"
-      load_and_authorize_resource :attempt, through: :survey, class: "Surveillance::Attempt"
-
-      before_filter :load_project
+      expose(:survey, model: Surveillance::Survey, finder_parameter: :survey_id)
+      expose(:attempts) { survey.attempts }
+      expose(:attempt,  model: Surveillance::Attempt, attributes: :attempt_params)
 
       def index
       end
@@ -20,9 +19,8 @@ module Surveillance
 
       protected
 
-      def load_project
-        @survey ||= @attempt.survey
-        @project = @survey.project
+      def attempt_params
+        stong_parameters? ? params.require(:attempt).permit! : params[:attempt]
       end
     end
   end

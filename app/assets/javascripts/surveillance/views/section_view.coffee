@@ -1,15 +1,16 @@
 class Surveillance.SectionView extends Backbone.View
   events:
     "click .validate-section": "validate"
+    "click .validate-survey": "validate"
     "click .back-to-previous-section": "cancel"
 
   initialize: ->
-    @questionViews = @$(".surveillance-question").map (i, el) ->
-      new Surveillance.QuestionView(el: el)
+    @questionViews = @$(".surveillance-question").map (i, el) =>
+      new Surveillance[@questionViewClassFor(el)](el: el)
 
     @id = @$el.data("id")
 
-  validate: ->
+  validate: (e) ->
     isValid = _.reduce(
       @questionViews,
       (valid, view) => valid and view.model.isValid()
@@ -22,8 +23,11 @@ class Surveillance.SectionView extends Backbone.View
           @trigger("change-section", rule.get("section_id"))
         else if action == "finalize_survey"
           @trigger("submit-survey")
-      else
+      else if $(e.currentTarget).hasClass("validate-survey")
         @trigger("validated")
+    else
+      e.preventDefault()
+
 
   firstMatchingBranchRule: ->
     for view in @questionViews
@@ -32,3 +36,10 @@ class Surveillance.SectionView extends Backbone.View
 
   cancel: ->
     @trigger("canceled")
+
+  questionViewClassFor: (el) ->
+    _.reduce(
+      $(el).data("view").split("-")
+      (name, str) -> name + str.charAt(0).toUpperCase() + str.slice(1)
+      ""
+    ) + "View"

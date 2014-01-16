@@ -1,13 +1,12 @@
 module Surveillance
   class Question < ActiveRecord::Base
     include Surveillance::Field
-    # include Sortable
-    # sortable parent: :parent
 
-    belongs_to :parent, polymorphic: true, inverse_of: :questions
     has_many :questions, as: :parent, class_name: "Surveillance::Question",
       inverse_of: :parent
     accepts_nested_attributes_for :questions, allow_destroy: true
+
+    belongs_to :parent, polymorphic: true, inverse_of: :questions
 
     has_many :options, class_name: "Surveillance::Option", dependent: :destroy
     has_many :answers, class_name: "Surveillance::Answer", dependent: :destroy

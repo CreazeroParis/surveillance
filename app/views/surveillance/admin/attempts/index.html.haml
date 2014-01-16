@@ -1,32 +1,39 @@
 %h1
-  = "Sondage #{ @survey.title }"
-  = link_to "Retour à la liste des sondages", admin_project_surveys_path(@project), class: "btn btn-warning pull-right"
+  = "Sondage #{ survey.title }"
+  = link_to "Retour à la liste des sondages", admin_surveys_path, class: "btn btn-default pull-right"
 
 %ul.nav.nav-tabs
   %li.active
-    %a{"data-toggle" => "tab", :href => "#liste-reponses"} 
+    %a{"data-toggle" => "tab", :href => "#liste-reponses"}
       Liste des réponses
   %li
-    %a{"data-toggle" => "tab", :href => "#recap"} 
+    %a{"data-toggle" => "tab", :href => "#recap"}
       Recapitulatif
 
 
 .tab-content.inside-shadow
 
   #liste-reponses.tab-pane.fade.in.active
-    - @attempts.each do |attempt|
-      .attempt
-        .title.pull-left
-          Répondu le :    
-        %label.pull-left
-          = l(attempt.created_at)
-        = link_to "Voir les réponses", show_admin_survey_attempts_path(@survey, attempt), class: "btn pull-right"
-        .clear
+    %table.table.table-striped.table-hover
+      %thead
+        %tr
+          %th Date de réponse
+          %th Adresse IP
+          %th
+      %tbody
+        - attempts.each do |attempt|
+          %tr.attempt
+            %td
+              = l(attempt.created_at)
+            %td
+              = attempt.ip_address
+            %td
+              = link_to "Voir les réponses", admin_attempt_path(attempt), class: "btn btn-default"
 
 
   #recap.tab-pane.fade
-  
-    - @survey.sections.each do |section|
+
+    - survey.sections.each do |section|
       %h1= section.title
       - section.questions.each do |question|
         = survey_overview_for question

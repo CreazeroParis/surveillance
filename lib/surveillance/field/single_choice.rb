@@ -1,6 +1,6 @@
 module Surveillance
   module Field
-    class SingleChoice < Field::Base
+    class SingleChoice < Base
       setting :other, type: :boolean, default: false
 
       def choosable?

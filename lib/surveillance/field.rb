@@ -10,6 +10,7 @@ module Surveillance
     autoload :MultipleChoices, "surveillance/field/multiple_choices"
     autoload :Matrix, "surveillance/field/matrix"
     autoload :MultipleChoicesMatrix, "surveillance/field/multiple_choices_matrix"
+    autoload :SelectMatrix, "surveillance/field/select_matrix"
     autoload :MatrixChoice, "surveillance/field/matrix_choice"
     autoload :MatrixQuestion, "surveillance/field/matrix_question"
     autoload :Order, "surveillance/field/order"
@@ -18,10 +19,13 @@ module Surveillance
     mattr_accessor :available_field_types
     @@available_field_types = %w(
       text text_area single_choice multiple_choices
-      matrix multiple_choices_matrix order
+      matrix multiple_choices_matrix select_matrix order
     )
 
-    def field attempt: nil, force_reload: false
+    def field options = {}
+      attempt = options.fetch(:attempt, nil)
+      force_reload = options.fetch(:force_reload, false)
+
       return @field if !force_reload && @field
 
       @field = (field_class).new(self, attempt: attempt)

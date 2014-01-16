@@ -1,9 +1,9 @@
 module Surveillance
   module Admin
     class QuestionsController < ApplicationController
-      expose(:section, model: "Surveillance::Section", finder_parameter: :section_id)
+      expose(:section, model: Surveillance::Section, finder_parameter: :section_id)
       expose(:questions) { section.questions }
-      expose(:question,  model: "Surveillance::Question", attributes: :question_params)
+      expose(:question,  model: Surveillance::Question, attributes: :question_params)
 
       def index
       end
@@ -37,7 +37,7 @@ module Surveillance
           redirect_to edit_admin_section_path(question.parent)
         else
           flash[:error] = flash_message(:error)
-          @section = question.parent
+          section = question.parent
           render "admin/surveillance/sections/edit"
         end
       end
@@ -45,13 +45,13 @@ module Surveillance
       def destroy
         question.destroy
         flash[:success] = flash_message(:success)
-        redirect_to edit_admin_section_path(@section)
+        redirect_to edit_admin_section_path(question.parent)
       end
 
       protected
 
       def question_params
-        params.require(:question).permit!
+        stong_parameters? ? params.require(:question).permit! : params[:question]
       end
     end
   end

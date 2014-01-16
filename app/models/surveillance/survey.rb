@@ -1,14 +1,10 @@
 module Surveillance
   class Survey < ActiveRecord::Base
-    # include Sortable
-
-    has_many :sections, -> { order("surveillance_sections.position ASC") }, foreign_key: "survey_id",
-      dependent: :destroy, inverse_of: :survey
+    has_many :sections, foreign_key: "survey_id", dependent: :destroy,
+      inverse_of: :survey, order: "surveillance_sections.position ASC"
 
     has_many :attempts, class_name: "Surveillance::Attempt",
       foreign_key: "survey_id", dependent: :destroy
-
-    # accepts_nested_attributes_for :sections
 
     validates_presence_of :title
 
