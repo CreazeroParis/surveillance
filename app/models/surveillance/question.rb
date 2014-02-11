@@ -9,6 +9,8 @@ module Surveillance
     belongs_to :parent, polymorphic: true, inverse_of: :questions
 
     has_many :options, class_name: "Surveillance::Option", dependent: :destroy
+    accepts_nested_attributes_for :options, allow_destroy: :true
+
     has_many :answers, class_name: "Surveillance::Answer", dependent: :destroy
 
     has_many :settings, class_name: "Surveillance::FieldSetting",
@@ -22,6 +24,8 @@ module Surveillance
     validates_presence_of :title
 
     delegate :survey, to: :parent
+
+    scope :ordered, -> { order("surveillance_questions.position ASC") }
 
     def matching_rule_for answer
       branch_rules.find { |rule| rule.matches?(answer) }

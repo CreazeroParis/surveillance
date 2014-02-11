@@ -43,6 +43,7 @@ module Surveillance
 
     def optional_content_not_filled? attributes
       question.field.answer = self
+
       !question.field.mandatory_content? && !attributes["value"].presence
     end
   end

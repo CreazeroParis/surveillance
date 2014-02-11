@@ -1,5 +1,5 @@
 module Surveillance
-  class SurveysController < ApplicationController
+  class SurveysController < Surveillance::ApplicationController
     expose(:surveys)
     expose(:survey, model: Surveillance::Survey)
   end

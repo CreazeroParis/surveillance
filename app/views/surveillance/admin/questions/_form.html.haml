@@ -9,11 +9,19 @@
 
   = settings_fields_for(f, question)
 
+  - if question.persisted? && question.field.choosable?
+    .quesiton-options
+      %h2
+        Options
+      = f.fields_for :options do |fo|
+        = render partial: "surveillance/admin/options/field", locals: { f: fo } if fo.object
+
+      = link_to_add_fields "Ajouter une option", "#question-option-#{ f.object.id }", builder: f, relation: :options, partial: "surveillance/admin/options/field"
+
   .form-actions
     %button.btn.btn-primary{ type: "submit" }
       = question.new_record? ? "Ajouter" : "Mettre à jour"
 
     = link_to "Retour", edit_admin_section_path(question.parent || section), class: "btn btn-danger"
 
-  - if question.persisted? && question.field.choosable?
-    = render partial: "surveillance/admin/options/list"
+    / = render partial: "surveillance/admin/options/list"

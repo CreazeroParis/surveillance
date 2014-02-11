@@ -12,6 +12,7 @@ class Surveillance.BranchRule extends Backbone.Model
     optionId = @get("option_id").toString()
     matrix = @question.get("matrix")
     questionId = @get("question_id").toString() if matrix
+
     _.any @question.get("fields"), (answer) =>
       if matrix
         [qId, id] = answer.split(":")

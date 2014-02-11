@@ -7,6 +7,10 @@ module Surveillance
         true
       end
 
+      def view_name
+        "single-choice"
+      end
+
       def answer_string
         other_choosed? ? super : answer.options.map(&:title).join("|")
       end

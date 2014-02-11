@@ -1,7 +1,7 @@
 module Surveillance
   class ApplicationController < ::ApplicationController
     decent_configuration do
-      if defined?(StrongParameters)
+      if defined?(ActiveModel::ForbiddenAttributesProtection)
         strategy DecentExposure::StrongParametersStrategy
       end
     end
@@ -17,7 +17,7 @@ module Surveillance
     end
 
     def stong_parameters?
-      defined?(StrongParameters)
+      defined?(ActiveModel::ForbiddenAttributesProtection)
     end
   end
 end

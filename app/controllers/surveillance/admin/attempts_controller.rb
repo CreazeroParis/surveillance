@@ -1,6 +1,6 @@
 module Surveillance
   module Admin
-    class AttemptsController < ApplicationController
+    class AttemptsController < Surveillance::ApplicationController
       expose(:survey, model: Surveillance::Survey, finder_parameter: :survey_id)
       expose(:attempts) { survey.attempts }
       expose(:attempt,  model: Surveillance::Attempt, attributes: :attempt_params)

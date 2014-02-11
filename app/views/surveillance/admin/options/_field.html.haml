@@ -1,0 +1,6 @@
+%fieldset.option-field
+  = f.input :title, label: "" do
+    = f.text_field :title
+
+    = f.hidden_field :_destroy, data: { destroy: true }
+    = link_to "Supprimer", "#", class: "btn btn-danger", data: { "destroy-field" => true }

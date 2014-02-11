@@ -23,7 +23,7 @@ class Surveillance.SectionView extends Backbone.View
           @trigger("change-section", rule.get("section_id"))
         else if action == "finalize_survey"
           @trigger("submit-survey")
-      else if $(e.currentTarget).hasClass("validate-survey")
+      else if $(e.currentTarget).hasClass("validate-section")
         @trigger("validated")
     else
       e.preventDefault()
