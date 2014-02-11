@@ -15,7 +15,7 @@ module Surveillance
 
     has_many :settings, class_name: "Surveillance::FieldSetting",
       dependent: :destroy
-    accepts_nested_attributes_for :settings, allow_destroy: :true
+    accepts_nested_attributes_for :settings
 
     has_many :branch_rules, class_name: "Surveillance::BranchRule",
       dependent: :destroy, inverse_of: :question

@@ -69,6 +69,8 @@ fr:
         other:
           admin: "Ajouter un champ autre ?"
           field: "Autre"
+        randomize:
+          admin: "Ordre des réponses aléatoire"
       multiple_choice:
         other:
           admin: "Ajouter un champ autre ?"

@@ -1,6 +1,6 @@
 = f.fields_for :answers, question.field.answer_or_initialize do |fa|
   = fa.input :answer, label: question.title, required: question.mandatory, hint: question.description do
-    - question.options.each do |option|
+    - question.field.ordered_options.each do |option|
       %label.radio
         = fa.radio_button :option_id, option.id
         = option.title

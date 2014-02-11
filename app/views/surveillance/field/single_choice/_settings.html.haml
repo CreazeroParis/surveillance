@@ -1,9 +1,21 @@
-= f.fields_for :settings, question.settings.find_or_initialize_by_key(:other) do |fo|
+= f.fields_for :settings, question.settings.find_or_initialize_by(key: "other") do |fo|
   - other = question.field.settings.other
   .control-group
-    = fo.label :value, other.admin_label, class: "control-label"
     .controls
       %label.checkbox
         = fo.check_box :value
+        = other.admin_label
 
-  = fo.hidden_field :key, value: :other
+    = fo.hidden_field :key, value: :other
+    = fo.hidden_field :id, value: fo.object.id if fo.object.persisted?
+
+= f.fields_for :settings, question.settings.find_or_initialize_by(key: "randomize") do |fr|
+  - randomize = question.field.settings.randomize
+  .control-group
+    .controls
+      %label.checkbox
+        = fr.check_box :value
+        = randomize.admin_label
+
+    = fr.hidden_field :key, value: :randomize
+    = fr.hidden_field :id, value: fr.object.id if fr.object.persisted?

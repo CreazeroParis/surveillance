@@ -1,6 +1,6 @@
 = f.fields_for :answers, question.field.answer_or_initialize do |fa|
   = fa.input :option_ids, label: question.title, required: question.mandatory, hint: question.description do
-    = fa.collection_check_boxes :option_ids, question.options, :id, :title do |input|
+    = fa.collection_check_boxes :option_ids, question.field.ordered_options, :id, :title do |input|
       - input.label class: "check_box" do
         = input.check_box
         = input.text

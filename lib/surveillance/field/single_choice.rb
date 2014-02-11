@@ -2,6 +2,7 @@ module Surveillance
   module Field
     class SingleChoice < Base
       setting :other, type: :boolean, default: false
+      setting :randomize, type: :boolean, default: false
 
       def choosable?
         true
@@ -38,6 +39,14 @@ module Surveillance
       def display_other_field? question
         other = question.settings.find { |s| s.key == "other" }
         other ? (other.value == "1") : false
+      end
+
+      def ordered_options
+        if settings.randomize
+          question.options.sort_by { rand }
+        else
+          question.options
+        end
       end
     end
   end
