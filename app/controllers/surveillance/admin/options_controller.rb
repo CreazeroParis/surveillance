@@ -1,6 +1,6 @@
 module Surveillance
   module Admin
-    class OptionsController < Surveillance::ApplicationController
+    class OptionsController < Surveillance::Admin::BaseController
       expose(:question,  model: Surveillance::Question, finder_parameter: :question_id)
       expose(:options) { question.options }
       expose(:option,  model: Surveillance::Option, attributes: :options_params)

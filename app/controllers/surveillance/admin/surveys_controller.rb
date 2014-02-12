@@ -1,6 +1,6 @@
 module Surveillance
   module Admin
-    class SurveysController < Surveillance::ApplicationController
+    class SurveysController < Surveillance::Admin::BaseController
       expose(:surveys) { Surveillance::Survey.order("updated_at DESC") }
       expose(:survey, attributes: :survey_params, model: Surveillance::Survey)
 

@@ -1,6 +1,6 @@
 module Surveillance
   module Admin
-    class QuestionsController < Surveillance::ApplicationController
+    class QuestionsController < Surveillance::Admin::BaseController
       expose(:section, model: Surveillance::Section, finder_parameter: :section_id)
       expose(:questions) { section.questions }
       expose(:question,  model: Surveillance::Question, attributes: :question_params)

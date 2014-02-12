@@ -9,6 +9,13 @@ module Surveillance
   autoload :Validators, "surveillance/validators"
 
   class << self
+    # Defines an autorization method to be called before actions in admin
+    # controllers to authenticate admin users
+    #
+    mattr_accessor :admin_authorization_method
+    @@admin_authorization_method = nil
+
+
     def table_name_prefix
       'surveillance_'
     end
@@ -18,6 +25,10 @@ module Surveillance
         str = item.to_s
         [I18n.t("surveillance.#{ key }.#{ str }"), str]
       end
+    end
+
+    def config &block
+      yield self
     end
   end
 end
