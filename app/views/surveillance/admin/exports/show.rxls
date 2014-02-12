@@ -1,0 +1,36 @@
+# Create sheet
+@sheet = workbook.create_worksheet
+
+questions = sections.reduce([]) do |headers, section|
+  headers + section.questions.reduce([]) do |section_headers, question|
+    section_headers + if question.field.has_sub_questions?
+      question.questions.map do |sub_question|
+        sub_question
+      end
+    else
+      [question]
+    end
+  end
+end
+
+columns = [t("surveillance.attempts.state")] + questions.map(&:title)
+last_column_index = columns.length - 1
+
+@sheet.row(0).concat(columns)
+set_format(0, (0..last_column_index), :black_background)
+(0..last_column_index).each { |n| @sheet.column(n).width = 30 }
+
+attempts.each_with_index do |attempt, index|
+  row = index + 1
+
+  answers = questions.map do |question|
+    puts "#{ question.description } - #{ attempt.inspect }"
+    if question.field(rebuild: true, attempt: attempt).answer
+      question.field.answer_string
+    end
+  end
+
+  @sheet.row(row).concat([attempt.state_label] + answers)
+end
+
+@sheet

@@ -1,0 +1,38 @@
+= simple_form_for attempt, url: response_attempt_path(attempt), html: { class: "surveillance-attempt-form", data: { "partial-update-url" => response_partial_attempt_path(attempt) } } do |f|
+  = f.hidden_field :survey_id, value: survey.id
+  = f.hidden_field :last_answered_section, class: "last-answered-section"
+
+  .survey-question
+    .titre
+      = survey.title
+
+  - if survey.description.presence
+    .survey-description
+      = survey.description.html_safe
+
+  .survey-sections
+    - survey.sections.each_with_index do |section, index|
+      .survey-section{ style: ("display:none;" if index != attempt.last_answered_section + 1), data: { id: section.id, index: index } }
+        .bloc
+          %h3
+            = section.title
+
+          - if section.description.presence
+            .section-description
+              = section.description.html_safe
+
+          - section.questions.each do |question|
+            = survey_field_for(f, question)
+
+        .form-actions
+          - if index > 0
+            %button.btn.btn-danger.back-to-previous-section{ type: "button" }
+              Retour à la page précédente
+
+          - if index < (survey.sections.length - 1)
+            %button.btn.btn-primary.validate-section{ type: "button" }
+              Page suivante
+          - else
+            %button.btn.btn-primary.validate-survey{ type: "submit" }
+              Soumettre le questionnaire
+

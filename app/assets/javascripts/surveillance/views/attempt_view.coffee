@@ -1,12 +1,17 @@
 class Surveillance.AttemptView extends Backbone.View
   initialize: ->
-    @sectionViews = _.map @$(".surveillance-section"), (el) =>
+    @partialUpdateURL = @$el.data("partial-update-url")
+    @$lastAnsweredSectionField = @$(".last-answered-section")
+    @lastAnsweredSection = @$lastAnsweredSectionField.val()
+
+    @sectionViews = _.map @$(".survey-section"), (el) =>
       section = new Surveillance.SectionView(el: el)
       @listenTo section, "validated", => @nextSection(section)
       @listenTo section, "canceled", => @previousSection(section)
       @listenTo section, "change-section", (sectionId) =>
         @changeSection(section, sectionId)
       @listenTo section, "submit-survey", => @submit()
+      @listenTo section, "section-complete", => @savePartialAttemptAt(section.index)
 
       section
 
@@ -46,3 +51,10 @@ class Surveillance.AttemptView extends Backbone.View
 
   submit: ->
     @$el.submit()
+
+  savePartialAttemptAt: (index) ->
+    @updateLanstAnsweredSection(index)
+    $.post(@partialUpdateURL, @$el.serialize())
+
+  updateLanstAnsweredSection: (index) ->
+    @$lastAnsweredSectionField.val(index) if index > @lastAnsweredSection

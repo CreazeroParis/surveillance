@@ -15,7 +15,6 @@ module Surveillance
     mattr_accessor :admin_authorization_method
     @@admin_authorization_method = nil
 
-
     def table_name_prefix
       'surveillance_'
     end

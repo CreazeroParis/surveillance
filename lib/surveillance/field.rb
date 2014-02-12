@@ -24,9 +24,9 @@ module Surveillance
 
     def field options = {}
       attempt = options.fetch(:attempt, nil)
-      force_reload = options.fetch(:force_reload, false)
+      rebuild = options.fetch(:rebuild, false)
 
-      return @field if !force_reload && @field
+      return @field if !rebuild && @field
 
       @field = (field_class).new(self, attempt: attempt)
     end

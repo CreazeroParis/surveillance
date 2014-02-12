@@ -17,14 +17,17 @@
     %table.table.table-striped.table-hover
       %thead
         %tr
-          %th Date de réponse
-          %th Adresse IP
+          %th= t("surveillance.attempts.answer_date")
+          %th= t("surveillance.attempts.state")
+          %th= t("surveillance.attempts.ip_address")
           %th
       %tbody
         - attempts.each do |attempt|
           %tr.attempt
             %td
               = l(attempt.created_at)
+            %td
+              = attempt.state_label
             %td
               = attempt.ip_address
             %td

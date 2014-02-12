@@ -1,3 +1,5 @@
+require "state_machine"
+
 module Surveillance
   class Attempt < ActiveRecord::Base
     has_many :answers, class_name: "Surveillance::Answer",
@@ -9,12 +11,45 @@ module Surveillance
     accepts_nested_attributes_for :answers
 
     scope :includes_all, -> {
-      includes(
-        answers: [:question, :options, :content]
-      )
+      includes(answers: [:question, :options, :content])
     }
 
-    before_validation do
+    before_validation :filter_required_answers
+
+    state_machine :state, initial: :empty do
+      event :fill do
+        transition empty: :partially_filled, partially_filled: same
+      end
+
+      event :complete do
+        transition [:empty, :partially_filled] => :completed
+      end
+
+      state :empty do
+        before_save :fill, if: :answers_filled
+
+        def answers_filled
+          answers.length > 0
+        end
+      end
+
+      state :partially_filled do
+        def state_label
+          [
+            I18n.t("surveillance.attempts.states.#{ state_name }"),
+            I18n.t("surveillance.attempts.step", step: last_answered_section + 1),
+          ].join(" - ")
+        end
+      end
+
+      state all - [:partially_filled] do
+        def state_label
+          I18n.t("surveillance.attempts.states.#{ state_name }")
+        end
+      end
+    end
+
+    def filter_required_answers
       answers_to_delete = answers.reduce([]) do |delete, answer|
         delete << answer unless sections_to_answer[answer.question.section.id]
         delete
@@ -42,7 +77,10 @@ module Surveillance
     end
 
     def build_sections_to_answer_hash
-      @sections = survey.sections.includes(questions: [:questions, :branch_rules])
+      @sections =
+        survey.sections.includes(questions: [:questions, :branch_rules])
+          .limit(last_answered_section + 1)
+
       # Prepare sections to answer hash, with each section needing to be
       # answered by default
       sections_hash = Hash[@sections.map { |section| [section.id, true] }]

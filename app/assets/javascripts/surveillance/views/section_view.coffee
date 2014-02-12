@@ -9,6 +9,7 @@ class Surveillance.SectionView extends Backbone.View
       new Surveillance[@questionViewClassFor(el)](el: el)
 
     @id = @$el.data("id")
+    @index = @$el.data("index")
 
   validate: (e) ->
     isValid = _.reduce(
@@ -21,10 +22,12 @@ class Surveillance.SectionView extends Backbone.View
       if (rule = @firstMatchingBranchRule())
         if (action = rule.get("action")) == "goto_section"
           @trigger("change-section", rule.get("section_id"))
+          @trigger("section-complete")
         else if action == "finalize_survey"
           @trigger("submit-survey")
       else if $(e.currentTarget).hasClass("validate-section")
         @trigger("validated")
+        @trigger("section-complete")
     else
       e.preventDefault()
 
@@ -43,3 +46,4 @@ class Surveillance.SectionView extends Backbone.View
       (name, str) -> name + str.charAt(0).toUpperCase() + str.slice(1)
       ""
     ) + "View"
+

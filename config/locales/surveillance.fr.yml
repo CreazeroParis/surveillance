@@ -83,6 +83,17 @@ fr:
       doesnt_answer: "ne répond pas à la question"
       answers_option: "choisi la réponse"
       doesnt_answer_option: "ne choisi pas la réponse"
+    attempts:
+      step: "Étape %{step}"
+      state: "Remplissage"
+      answer_date: "Date de réponse"
+      ip_address: "Adresse IP"
+      states:
+        empty: "Non commencé"
+        partially_filled: "Partiel"
+        completed: "Terminé"
+    exports:
+      results: "resultats-questionnaire-%{survey}"
 
   activerecord:
     attributes:
