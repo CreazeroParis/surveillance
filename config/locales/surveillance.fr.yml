@@ -96,6 +96,10 @@ fr:
         already_completed: |
           Vous avez déjà rempli le questionnaire et vous ne pouvez le remplir
           qu'une seule fois. Merci pour votre participation !
+      previous_attempt_recovered: |
+        Vous aviez déjà commencé à remplir le formulaire, il a donc été récupéré
+        pour vous, vous pouvez le continuer directement.
+
     exports:
       results: "resultats-questionnaire-%{survey}"
 

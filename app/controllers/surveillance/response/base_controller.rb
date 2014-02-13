@@ -4,7 +4,8 @@ module Surveillance
   module Response
     class BaseController < Surveillance::ApplicationController
       expose(:attempts) { surveys.attempts }
-      expose(:attempt, model: Surveillance::Attempt, attributes: :attempt_params, finder: :find_by_access_token)
+      expose(:attempt, model: Surveillance::Attempt, attributes: :attempt_params,
+        finder: :find_by_access_token)
 
       before_filter :survey_closed
 

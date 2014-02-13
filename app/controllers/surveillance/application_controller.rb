@@ -6,6 +6,8 @@ module Surveillance
       end
     end
 
+    layout Surveillance.views_layout if Surveillance.views_layout
+
     protected
 
     def flash_message type

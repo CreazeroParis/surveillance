@@ -2,19 +2,20 @@ module Surveillance
   module Response
     class AttemptsController < Surveillance::Response::BaseController
       def new
-        if previous_attempt
+        attempt = if previous_attempt
           if previous_attempt.completed?
-            flash[:error] = t("surveillance.attempts.already_completed")
+            flash[:error] = t("surveillance.attempts.errors.already_completed")
             redirect_to surveys_path and return
           end
-          attempt = previous_attempt
+
+          flash[:success] = t("surveillance.attempts.previous_attempt_recovered")
+          previous_attempt
         else
-          attempt.assign_attributes(
+          Surveillance::Attempt.create(
             last_answered_section: -1,
             ip_address: request.remote_ip,
             survey: survey
           )
-          attempt.save
         end
 
         redirect_to edit_response_attempt_path(attempt)

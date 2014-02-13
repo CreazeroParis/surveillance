@@ -6,4 +6,11 @@ Surveillance.config do |config|
   # Default : nil
   #
   # config.admin_authorization_method = :authenticate_user!
+
+  # Define a layout to be used in Surveillance views
+  # Setting it to nil will let the default layout
+  #
+  # Default : nil
+  #
+  # config.views_layout = "survey"
 end
