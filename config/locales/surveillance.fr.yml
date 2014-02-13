@@ -92,6 +92,10 @@ fr:
         empty: "Non commencé"
         partially_filled: "Partiel"
         completed: "Terminé"
+      errors:
+        already_completed: |
+          Vous avez déjà rempli le questionnaire et vous ne pouvez le remplir
+          qu'une seule fois. Merci pour votre participation !
     exports:
       results: "resultats-questionnaire-%{survey}"
 

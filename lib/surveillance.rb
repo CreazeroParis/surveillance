@@ -29,5 +29,10 @@ module Surveillance
     def config &block
       yield self
     end
+
+    def unique_token
+      (Time.now.to_f * (100 ** 10)).to_i.to_s(36) +
+        (rand * 10 ** 10).to_i.to_s(36)
+    end
   end
 end

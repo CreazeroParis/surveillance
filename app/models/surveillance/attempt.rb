@@ -49,6 +49,12 @@ module Surveillance
       end
     end
 
+    before_validation :ensure_access_token
+
+    def ensure_access_token
+      self.access_token ||= Surveillance.unique_token
+    end
+
     def filter_required_answers
       answers_to_delete = answers.reduce([]) do |delete, answer|
         delete << answer unless sections_to_answer[answer.question.section.id]
@@ -68,6 +74,10 @@ module Surveillance
 
     def questions_answers
       @questions_answers ||= Hash[answers.map { |a| [a.question_id, a] }]
+    end
+
+    def to_param
+      access_token
     end
 
     private
