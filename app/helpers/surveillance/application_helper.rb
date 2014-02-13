@@ -1,12 +1,12 @@
 module Surveillance
   module ApplicationHelper
     # Renders a form field for the given question
-    def survey_field_for builder, question
+    def survey_field_for builder, question, index
       question.field.attempt = builder.object
 
       field = capture do
         render partial: question.field.form_path, locals: {
-          f: builder, question: question
+          f: builder, question: question, question_index: index
         }
       end
 
