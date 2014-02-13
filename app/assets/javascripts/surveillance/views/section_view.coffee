@@ -12,6 +12,7 @@ class Surveillance.SectionView extends Backbone.View
     @index = @$el.data("index")
 
   validate: (e) ->
+    errors = []
     isValid = _.reduce(
       @questionViews,
       (valid, view) => valid and view.model.isValid()

@@ -9,3 +9,5 @@
     = render partial: questions_fields_path, locals: { f: fq } if fq.object
 
   = link_to_add_fields "Ajouter une question à la matrice", "#matrix-questions-#{ f.object.id }", builder: f, relation: :questions, partial: questions_fields_path
+
+= render partial: "surveillance/field/shared/other_choice", locals: { f: f, question: question }

@@ -1,13 +1,4 @@
-= f.fields_for :settings, question.settings.find_or_initialize_by(key: "other") do |fo|
-  - other = question.field.settings.other
-  .control-group
-    .controls
-      %label.checkbox
-        = fo.check_box :value
-        = other.admin_label
-
-    = fo.hidden_field :key, value: :other
-    = fo.hidden_field :id, value: fo.object.id if fo.object.persisted?
+= render partial: "surveillance/field/shared/other_choice", locals: { f: f, question: question }
 
 = f.fields_for :settings, question.settings.find_or_initialize_by(key: "randomize") do |fr|
   - randomize = question.field.settings.randomize

@@ -3,7 +3,7 @@ class Surveillance.QuestionView extends Backbone.View
     "change input, select": "processAnswerValues"
 
   initialize: ->
-    @$fields = @$("input, select").not("[type=hidden]")
+    @$fields = @getFields()
     required = @$(".required").length > 0
 
     @model = new Surveillance.Question(
@@ -30,3 +30,5 @@ class Surveillance.QuestionView extends Backbone.View
   refreshErrors: ->
     @$(".control-group").addClass("error")
 
+  getFields: ->
+    @$("input, select").not("[type=hidden]")

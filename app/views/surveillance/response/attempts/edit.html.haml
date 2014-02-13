@@ -21,7 +21,7 @@
             .section-description
               = section.description.html_safe
 
-          - section.questions.each_with_index do |question|
+          - section.questions.each_with_index do |question, index|
             = survey_field_for(f, question, index)
 
         .form-group

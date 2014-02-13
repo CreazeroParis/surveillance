@@ -1,6 +1,8 @@
 module Surveillance
   module Field
     class Matrix < Base
+      include OtherChoice
+
       def choosable?
         true
       end

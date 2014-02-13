@@ -16,6 +16,8 @@ module Surveillance
     autoload :Order, "surveillance/field/order"
     autoload :OrderQuestion, "surveillance/field/order_question"
 
+    autoload :OtherChoice, "surveillance/field/other_choice"
+
     mattr_accessor :available_field_types
     @@available_field_types = %w(
       text text_area single_choice multiple_choices

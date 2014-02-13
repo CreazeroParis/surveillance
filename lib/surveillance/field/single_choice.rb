@@ -1,7 +1,7 @@
 module Surveillance
   module Field
     class SingleChoice < Base
-      setting :other, type: :boolean, default: false
+      include OtherChoice
       setting :randomize, type: :boolean, default: false
 
       def choosable?
@@ -22,23 +22,6 @@ module Surveillance
         if other_choosed? && !answer.content
           answer.errors[:content] << I18n.t("errors.messages.empty")
         end
-      end
-
-      def present?
-        answer && answer.option_ids.length > 0 || other_choosed?
-      end
-
-      def mandatory_content?
-        other_choosed?
-      end
-
-      def other_choosed?
-        answer && answer.other_choosed
-      end
-
-      def display_other_field? question
-        other = question.settings.find { |s| s.key == "other" }
-        other ? (other.value == "1") : false
       end
 
       def ordered_options

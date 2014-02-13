@@ -67,14 +67,19 @@ fr:
     settings:
       single_choice:
         other:
-          admin: "Ajouter un champ autre ?"
+          admin: "Ajouter un champ \"Autre\" ?"
           field: "Autre"
         randomize:
           admin: "Ordre des réponses aléatoire"
       multiple_choice:
         other:
-          admin: "Ajouter un champ autre ?"
+          admin: "Ajouter un champ \"Autre\" ?"
           field: "Autre"
+      matrix:
+        other:
+          admin: "Ajouter un champ \"Autre\" ?"
+          field: "Autre(s) préciser"
+
     branch_actions:
       goto_section: "Aller à la section"
       finalize_survey: "Finaliser le questionnaire"

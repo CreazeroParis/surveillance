@@ -25,3 +25,13 @@
                 %td
                   %label
                     = fa.radio_button :option_id, option.id
+
+        = f.fields_for :answers, (question.field.answer_or_initialize_for(f.object)) do |fa|
+          %tr.control-group
+            - if question.field.display_other_field?(question)
+              %td
+                = fa.radio_button :option_id, "other", checked: fa.object.other_choosed
+                = question.field.settings.other.label
+              %td{ colspan: question.questions.length }
+                = fa.fields_for :content, fa.object.content_or_build do |fc|
+                  = fc.input :value, as: :string, label: false
