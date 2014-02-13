@@ -13,4 +13,11 @@ Surveillance.config do |config|
   # Default : nil
   #
   # config.views_layout = "survey"
+
+  # Register field partials to allow overriding field rendering from admin
+  #
+  # Don't forget to add the registered partial view in :
+  #   "app/views/surveillance/field/customer/<partial_path>"
+  #
+  # Surveillance.partials.register "Partial Name", "partial_path"
 end

@@ -3,6 +3,6 @@
 
   = f.hidden_field :question_id, value: option.question_id || question.id
 
-  .form-actions
+  .form-group
     %button.btn.btn-primary{ type: "submit" }
       = option.new_record? ? "Ajouter" : "Mettre à jour"

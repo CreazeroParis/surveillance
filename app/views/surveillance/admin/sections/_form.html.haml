@@ -3,7 +3,7 @@
   / = f.input :description, as: :rich, input_html: { rows: 5 }
   = f.input :description, input_html: { rows: 5 }
 
-  .form-actions
+  .form-group
     = link_to edit_admin_survey_path(section.survey || survey), class: "btn btn-default" do
       Retour
     %button.btn.btn-danger{ type: "submit" }

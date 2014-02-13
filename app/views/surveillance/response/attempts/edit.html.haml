@@ -24,7 +24,7 @@
           - section.questions.each do |question|
             = survey_field_for(f, question)
 
-        .form-actions
+        .form-group
           - if index > 0
             %button.btn.btn-danger.back-to-previous-section{ type: "button" }
               Retour à la page précédente

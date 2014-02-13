@@ -9,7 +9,7 @@
     / = f.input :last_page_description, as: :rich, input_html: { rows: 5 }
     = f.input :last_page_description, input_html: { rows: 5 }
 
-    .form-actions
+    .form-group
       = link_to admin_surveys_path, class: "btn btn-danger" do
         Retour
       %button.btn.btn-primary{ type: "submit" }

@@ -23,7 +23,7 @@
           = link_to_add_fields "Ajouter une action conditionnelle", "#branch-rules-#{ f.object.id }", builder: f, relation: :branch_rules, partial: question.field.rules_form_path, locals: { question: question }
 
 
-        .form-actions
+        .form-group
           %button.btn.btn-primary{ type: "submit" }
             Mettre à jour les actions
           = link_to "Annuler", "", class: "btn btn-danger"

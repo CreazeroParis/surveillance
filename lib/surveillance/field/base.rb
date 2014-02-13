@@ -64,10 +64,20 @@ module Surveillance
       end
 
       # Defines following partial view path methods :
-      %w(form show settings overview export).each do |view|
+      %w(show settings overview export).each do |view|
         define_method(:"#{ view }_path") do
           "#{ self.class.name.underscore }/#{ view }"
         end
+      end
+
+      def form_path
+        puts "FORM PATH : #{ question.partial.presence || "form" }"
+        if question.partial.presence
+          "surveillance/field/custom/#{ question.partial }"
+        else
+          "#{ self.class.name.underscore }/form"
+        end
+
       end
 
       def rules_form_path

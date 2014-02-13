@@ -7,6 +7,9 @@
 
   = f.input :description, hint: "Affiché en dessous de la question.", input_html: { rows: 5 }
 
+  - if Surveillance.partials.length > 0
+    = f.input :partial, collection: Surveillance.partials
+
   = settings_fields_for(f, question)
 
   - if question.persisted? && question.field.choosable?
@@ -18,7 +21,7 @@
 
       = link_to_add_fields "Ajouter une option", "#question-option-#{ f.object.id }", builder: f, relation: :options, partial: "surveillance/admin/options/field"
 
-  .form-actions
+  .form-group
     %button.btn.btn-primary{ type: "submit" }
       = question.new_record? ? "Ajouter" : "Mettre à jour"
 

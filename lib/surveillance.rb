@@ -4,20 +4,24 @@ module Surveillance
   extend ActiveSupport::Autoload
 
   autoload :Field, "surveillance/field"
+  autoload :PartialsCollection, "surveillance/partials_collection"
   autoload :SettingsCollection, "surveillance/settings_collection"
   autoload :Setting, "surveillance/setting"
   autoload :Validators, "surveillance/validators"
 
+  # Defines an autorization method to be called before actions in admin
+  # controllers to authenticate admin users
+  #
+  mattr_accessor :admin_authorization_method
+  @@admin_authorization_method = nil
+
+  mattr_accessor :views_layout
+  @@views_layout = nil
+
+  mattr_accessor :partials
+  @@partials = Surveillance::PartialsCollection.new
+
   class << self
-    # Defines an autorization method to be called before actions in admin
-    # controllers to authenticate admin users
-    #
-    mattr_accessor :admin_authorization_method
-    @@admin_authorization_method = nil
-
-    mattr_accessor :views_layout
-    @@views_layout = nil
-
     def table_name_prefix
       'surveillance_'
     end
