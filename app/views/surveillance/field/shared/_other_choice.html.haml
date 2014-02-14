@@ -1,6 +1,6 @@
 = f.fields_for :settings, question.settings.find_or_initialize_by(key: "other") do |fo|
   - other = question.field.settings.other
-  .control-group
+  .form-group
     .controls
       %label.checkbox
         = fo.check_box :value

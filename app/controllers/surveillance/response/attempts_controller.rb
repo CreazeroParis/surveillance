@@ -1,11 +1,15 @@
 module Surveillance
   module Response
     class AttemptsController < Surveillance::Response::BaseController
+      rescue_from Surveillance::Response::AttemptAlreadyRegistered,
+        with: :already_completed
+
       def new
         attempt = if previous_attempt
           if previous_attempt.completed?
-            flash[:error] = t("surveillance.attempts.errors.already_completed")
-            redirect_to surveys_path and return
+            raise Surveillance::Response::AttemptAlreadyRegistered.new(
+              survey: survey, attempt: previous_attempt
+            )
           end
 
           flash[:success] = t("surveillance.attempts.previous_attempt_recovered")
@@ -63,6 +67,15 @@ module Surveillance
           value: attempt.access_token,
           expires: 1.year.from_now
         }
+      end
+
+      def already_completed exception
+        if (callback = Surveillance.attempt_already_registered_callback)
+          instance_exec(exception, &callback)
+        else
+          flash[:error] = t("surveillance.attempts.errors.already_completed")
+          redirect_to surveys_path and return
+        end
       end
     end
   end

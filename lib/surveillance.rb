@@ -21,6 +21,9 @@ module Surveillance
   mattr_accessor :partials
   @@partials = Surveillance::PartialsCollection.new
 
+  mattr_accessor :attempt_already_registered_callback
+  @@attempt_already_registered_callback = nil
+
   class << self
     def table_name_prefix
       'surveillance_'

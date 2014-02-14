@@ -19,5 +19,19 @@ Surveillance.config do |config|
   # Don't forget to add the registered partial view in :
   #   "app/views/surveillance/field/customer/<partial_path>"
   #
-  # Surveillance.partials.register "Partial Name", "partial_path"
+  # config.partials.register "Partial Name", "partial_path"
+
+  # Register a callback to be called when an attempt has already be registered
+  # for an anonymous user.
+  # The callback will be executed in the context of the controller, allowing you
+  # to use controller methods
+  # Setting it to nil will keep the default behaviour of adding a flash[:error]
+  # message and redirecting to the surveys list
+  #
+  # Default : nil
+  #
+  # config.attempt_already_registered_callback = ->(exception) {
+  #   flash[:error] = "You already completed this survey"
+  #   redirect_to(root_path)
+  # }
 end

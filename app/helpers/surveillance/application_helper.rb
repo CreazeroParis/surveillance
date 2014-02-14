@@ -12,7 +12,9 @@ module Surveillance
 
       content_tag :div, field, class: "surveillance-question", data: {
         "branch-rules" => branch_rules_for(question),
-        "view" => question.field.view_name
+        "view" => question.field.view_name,
+        "question-id" => question.id,
+        "required" => question.mandatory
       }
     end
 

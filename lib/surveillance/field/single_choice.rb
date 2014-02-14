@@ -9,7 +9,7 @@ module Surveillance
       end
 
       def view_name
-        "single-choice"
+        "choice"
       end
 
       def answer_string

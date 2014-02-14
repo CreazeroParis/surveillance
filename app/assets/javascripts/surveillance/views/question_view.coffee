@@ -4,34 +4,47 @@ class Surveillance.QuestionView extends Backbone.View
 
   initialize: ->
     @$fields = @getFields()
-    required = @$(".required").length > 0
 
-    @model = new Surveillance.Question(
-      required: required, rules: @$el.data("branch-rules")
-    )
+    @beforeInitialize?()
+
+    @buildModel(required: @fieldRequired(), rules: @branchRules())
 
     @processAnswerValues()
 
     @listenTo(@model, "invalid", @refreshErrors)
 
   processAnswerValues: ->
-    fields = _.compact _.map @$fields, (el) => @processFieldValue($(el))
-
-    answers = _.keys(_.groupBy(@$fields, (el) -> $(el).attr("name"))).length
+    fields = @fieldValues()
+    answers = @requiredAnswersCount()
 
     @model.set(fields: fields, fieldsToFill: answers)
-    @$(".control-group").removeClass("error")
+    @$(".form-group").removeClass("has-error")
 
     @afterAnswerValuesProcessing?()
+
+  fieldValues: ->
+    _.compact(_.map(@$fields, (el) => @processFieldValue($(el))))
+
+  requiredAnswersCount: ->
+    _.keys(_.groupBy(@$fields, (el) -> $(el).attr("name"))).length
 
   processFieldValue: ($el) ->
     $el.val()
 
   refreshErrors: ->
-    @$(".control-group").addClass("error")
+    @$(".form-group").addClass("has-error")
 
   getFields: ->
     @$("input, select").not("[type=hidden]")
 
   isValid: ->
     @model.isValid()
+
+  fieldRequired: ->
+    @$el.data("required")
+
+  branchRules: ->
+    @$el.data("branch-rules")
+
+  buildModel: (options) ->
+    @model = new Surveillance.Question(options)

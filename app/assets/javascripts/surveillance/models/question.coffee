@@ -5,7 +5,11 @@ class Surveillance.Question extends Backbone.Model
     super(attrs, options)
 
   validate: ->
-    @get("required") && @get("fields").length < @get("fieldsToFill")
+    return null unless @get("required")
+    @processValidations()
+
+  processValidations: ->
+    @get("fields").length < @get("fieldsToFill")
 
   answered: ->
     @get("fields").length > 0
