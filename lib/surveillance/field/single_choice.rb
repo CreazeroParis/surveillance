@@ -25,7 +25,8 @@ module Surveillance
       end
 
       def ordered_options
-        if settings.randomize
+        randomize = question.settings.find { |s| s.key == "randomize" }
+        if randomize && randomize.value == "1"
           question.options.sort_by { rand }
         else
           question.options
