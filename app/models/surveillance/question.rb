@@ -34,5 +34,13 @@ module Surveillance
     def section
       parent_type == "Surveillance::Question" ? parent.parent : parent
     end
+
+    def column_header
+      if field.matrix? && field.display_other_field?(self)
+        title + " - #{ field.settings.other.label }"
+      else
+        title
+      end
+    end
   end
 end

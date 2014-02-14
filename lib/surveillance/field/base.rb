@@ -71,7 +71,6 @@ module Surveillance
       end
 
       def form_path
-        puts "FORM PATH : #{ question.partial.presence || "form" }"
         if question.partial.presence
           "surveillance/field/custom/#{ question.partial }"
         else

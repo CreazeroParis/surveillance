@@ -24,7 +24,10 @@ module Surveillance
       end
 
       def present?
-        question.questions.map(&:field).all?(&:present?)
+        question.questions.all? do |sub_question|
+          field = sub_question.field(attempt: attempt)
+          field.present?
+        end
       end
 
       def answer

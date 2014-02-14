@@ -32,3 +32,6 @@ class Surveillance.QuestionView extends Backbone.View
 
   getFields: ->
     @$("input, select").not("[type=hidden]")
+
+  isValid: ->
+    @model.isValid()

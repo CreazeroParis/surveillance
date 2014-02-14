@@ -15,7 +15,7 @@ class Surveillance.SectionView extends Backbone.View
     errors = []
     isValid = _.reduce(
       @questionViews,
-      (valid, view) => valid and view.model.isValid()
+      (valid, view) => valid and view.isValid()
       true
     )
 

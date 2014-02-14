@@ -4,8 +4,12 @@
 questions = sections.reduce([]) do |headers, section|
   headers + section.questions.reduce([]) do |section_headers, question|
     section_headers + if question.field.has_sub_questions?
-      question.questions.map do |sub_question|
-        sub_question
+      sub_questions = question.questions
+
+      if question.field.display_other_field?(question)
+        sub_questions + [question]
+      else
+        sub_questions
       end
     else
       [question]
@@ -13,7 +17,7 @@ questions = sections.reduce([]) do |headers, section|
   end
 end
 
-columns = [t("surveillance.attempts.state")] + questions.map(&:title)
+columns = [t("surveillance.attempts.state")] + questions.map(&:column_header)
 last_column_index = columns.length - 1
 
 @sheet.row(0).concat(columns)
@@ -24,7 +28,6 @@ attempts.each_with_index do |attempt, index|
   row = index + 1
 
   answers = questions.map do |question|
-    puts "#{ question.description } - #{ attempt.inspect }"
     if question.field(rebuild: true, attempt: attempt).answer
       question.field.answer_string
     end
