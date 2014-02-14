@@ -10,6 +10,8 @@ module Surveillance
 
     validates_presence_of :title
 
+    scope :ordered, -> { order("surveillance_options.id ASC") }
+
     def answers_for question
       answers.select do |answer|
         answer.question_id == question.id
