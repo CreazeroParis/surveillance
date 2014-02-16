@@ -4,16 +4,17 @@ class Surveillance.ChoiceView extends Surveillance.QuestionView
     "change .other-field input[type=text]": "otherChanged"
     "change select": "selectValueChanged"
 
+  beforeInitialize: ->
+    _.bindAll(this, "valueFor")
+
   choiceValues: ->
     if ($select = @$("select")).length
       $select.val() || null
     else
-      _.compact(
-        _.map(
-          @$("input[type=radio], input[type=checkbox]")
-          (input) -> ($input = $(input)).is(":checked") and $input.val()
-        )
-      )
+      _.compact(_.map(@$("input[type=radio], input[type=checkbox]"), @valueFor))
+
+  valueFor: (input) ->
+    ($input = $(input)).is(":checked") and (val = $input.val()) and parseInt(val, 10)
 
   otherValue: ->
     @$(".other-field input[type=text]").val() || null
@@ -43,7 +44,6 @@ class Surveillance.ChoiceView extends Surveillance.QuestionView
     )
 
   refreshErrors: ->
-    console.log @model.validationError
     if @model.validationError.chooseField
       @$(".form-group").addClass("has-error")
 

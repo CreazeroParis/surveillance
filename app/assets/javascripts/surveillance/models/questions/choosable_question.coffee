@@ -10,3 +10,6 @@ class Surveillance.ChoosableQuestion extends Surveillance.Question
     else
       false
 
+  hasAnswered: (optionId) ->
+    _.include(@get("value"), optionId)
+

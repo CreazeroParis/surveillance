@@ -8,15 +8,12 @@ class Surveillance.MatrixQuestionView extends Backbone.View
       value: @choiceValues()
     )
 
+    _.bindAll(this, "valueFor")
+
     @listenTo(@model, "invalid", @refreshErrors)
 
   choiceValues: ->
-    _.compact(
-      _.map(
-        @$("input[type=radio], input[type=checkbox]")
-        (input) -> ($input = $(input)).is(":checked") and $input.val()
-      )
-    )
+    _.compact(_.map(@$("input[type=radio], input[type=checkbox]"), @valueFor))
 
   valueChanged: ->
     @model.set(value: @choiceValues())
@@ -24,3 +21,6 @@ class Surveillance.MatrixQuestionView extends Backbone.View
 
   refreshErrors: ->
     @$el.addClass("danger") if @model.validationError
+
+  valueFor: (input) ->
+    ($input = $(input)).is(":checked") and (val = $input.val()) and parseInt(val, 10)
