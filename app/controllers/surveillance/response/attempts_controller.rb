@@ -1,17 +1,11 @@
 module Surveillance
   module Response
     class AttemptsController < Surveillance::Response::BaseController
-      rescue_from Surveillance::Response::AttemptAlreadyRegistered,
-        with: :already_completed
-
       def new
         attempt = if previous_attempt
           if previous_attempt.completed?
-            raise Surveillance::Response::AttemptAlreadyRegistered.new(
-              survey: survey, attempt: previous_attempt
-            )
+            attempt_already_completed!(previous_attempt) and return
           end
-
           flash[:success] = t("surveillance.attempts.previous_attempt_recovered")
           previous_attempt
         else
@@ -26,6 +20,7 @@ module Surveillance
       end
 
       def edit
+        attempt_already_completed!(attempt) and return if attempt.completed?
         store_attempt!(attempt)
       end
 
@@ -69,9 +64,9 @@ module Surveillance
         }
       end
 
-      def already_completed exception
+      def attempt_already_completed! attempt
         if (callback = Surveillance.attempt_already_registered_callback)
-          instance_exec(exception, &callback)
+          instance_exec(attempt, &callback)
         else
           flash[:error] = t("surveillance.attempts.errors.already_completed")
           redirect_to surveys_path and return

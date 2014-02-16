@@ -2,15 +2,6 @@
 
 module Surveillance
   module Response
-    class AttemptAlreadyRegistered < StandardError
-      attr_reader :survey, :attempt
-
-      def initialize attributes
-        @survey = attributes[:survey]
-        @attempt = attributes[:attempt]
-      end
-    end
-
     class BaseController < Surveillance::ApplicationController
       expose(:attempts) { surveys.attempts }
       expose(:attempt, model: Surveillance::Attempt, attributes: :attempt_params,

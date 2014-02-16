@@ -30,7 +30,7 @@ Surveillance.config do |config|
   #
   # Default : nil
   #
-  # config.attempt_already_registered_callback = ->(exception) {
+  # config.attempt_already_registered_callback = ->(attempt) {
   #   flash[:error] = "You already completed this survey"
   #   redirect_to(root_path)
   # }
