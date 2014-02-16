@@ -14,7 +14,7 @@
               = option.title
 
       %tbody
-        - question.questions.each do |sub_question|
+        - question.ordered_sub_questions.each do |sub_question|
           = f.fields_for :answers, (sub_question.field.answer_or_initialize_for(f.object)) do |fa|
             %tr.form-group{ class: ("error" if fa.object.errors.any?), data: { "sub-question-id" => sub_question.id } }
               %td

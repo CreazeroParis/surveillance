@@ -51,6 +51,11 @@ module Surveillance
         "question"
       end
 
+      def setting_value key
+        setting = question.settings.find { |s| s.key == key.to_s }
+        setting && setting.value
+      end
+
       def settings
         @settings ||= self.class.settings.freeze
       end

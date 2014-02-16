@@ -1,12 +1,3 @@
-= render partial: "surveillance/field/shared/other_choice", locals: { f: f, question: question }
+= boolean_setting_field_for(question, :other, f)
 
-= f.fields_for :settings, question.settings.find_or_initialize_by(key: "randomize") do |fr|
-  - randomize = question.field.settings.randomize
-  .form-group
-    .controls
-      %label.checkbox
-        = fr.check_box :value
-        = randomize.admin_label
-
-    = fr.hidden_field :key, value: :randomize
-    = fr.hidden_field :id, value: fr.object.id if fr.object.persisted?
+= boolean_setting_field_for(question, :randomize, f)

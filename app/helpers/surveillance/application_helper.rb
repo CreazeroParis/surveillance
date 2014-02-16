@@ -71,5 +71,11 @@ module Surveillance
         question.options.map { |option| [option.title, option.id] }
       )
     end
+
+    def boolean_setting_field_for question, key, builder
+      render partial: "surveillance/field/shared/boolean_option", locals: {
+        question: question, key: key, f: builder
+      }
+    end
   end
 end

@@ -2,6 +2,7 @@ module Surveillance
   module Field
     class Matrix < Base
       include OtherChoice
+      setting :randomize_sub_questions, type: :boolean, default: false
 
       def choosable?
         true
@@ -44,6 +45,14 @@ module Surveillance
         question.questions.each do |sub_question|
           sub_question.field_type = "matrix_question"
           sub_question.mandatory = question.mandatory
+        end
+      end
+
+      def ordered_sub_questions
+        if setting_value(:randomize_sub_questions) == "1"
+          question.questions.sort_by { rand }
+        else
+          question.questions
         end
       end
 

@@ -10,4 +10,6 @@
 
   = link_to_add_fields "Ajouter une question à la matrice", "#matrix-questions-#{ f.object.id }", builder: f, relation: :questions, partial: questions_fields_path
 
-= render partial: "surveillance/field/shared/other_choice", locals: { f: f, question: question }
+= boolean_setting_field_for(question, :other, f)
+
+= boolean_setting_field_for(question, :randomize_sub_questions, f)

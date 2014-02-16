@@ -79,6 +79,8 @@ fr:
         other:
           admin: "Ajouter un champ \"Autre\" ?"
           field: "Autre(s) préciser"
+        randomize_sub_questions:
+          admin: "Ordre des sous-questions aléatoire"
 
     branch_actions:
       goto_section: "Aller à la section"
