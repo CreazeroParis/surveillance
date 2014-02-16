@@ -14,7 +14,8 @@ class Surveillance.ChoiceView extends Surveillance.QuestionView
       _.compact(_.map(@$("input[type=radio], input[type=checkbox]"), @valueFor))
 
   valueFor: (input) ->
-    ($input = $(input)).is(":checked") and (val = $input.val()) and parseInt(val, 10)
+    if (value = ($input = $(input)).is(":checked") and $input.val())
+      if value.match(/^\d+$/) then parseInt(value, 10) else value
 
   otherValue: ->
     @$(".other-field input[type=text]").val() || null
