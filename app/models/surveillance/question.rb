@@ -1,6 +1,7 @@
 module Surveillance
   class Question < ActiveRecord::Base
     include Surveillance::Field
+    include ActionView::Helpers::SanitizeHelper
 
     has_many :questions, as: :parent, class_name: "Surveillance::Question",
       inverse_of: :parent
@@ -37,11 +38,13 @@ module Surveillance
     end
 
     def column_header
-      if field.matrix? && field.display_other_field?(self)
+      header = if field.matrix? && field.display_other_field?(self)
         title + " - #{ field.settings.other.label }"
       else
         title
       end
+
+      sanitize(header, tags: [])
     end
   end
 end
