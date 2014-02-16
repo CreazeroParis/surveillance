@@ -13,6 +13,6 @@ module Surveillance
     validates_presence_of :title, :position
 
     scope :includes_all, -> { includes(questions: :questions) }
-    scope :ordered, -> { order("surveillance_sections.id ASC") }
+    scope :ordered, -> { order("surveillance_sections.position ASC") }
   end
 end
