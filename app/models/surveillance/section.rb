@@ -1,8 +1,5 @@
 module Surveillance
   class Section < ActiveRecord::Base
-    # include Sortable
-    # sortable parent: :project
-
     belongs_to :survey, class_name: "Surveillance::Survey",
       inverse_of: :sections
 
