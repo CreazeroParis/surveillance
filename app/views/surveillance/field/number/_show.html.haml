@@ -1,0 +1,10 @@
+.question
+  %span.title
+    = question.title
+
+  %strong.answer
+    - if question.field.answer
+      = question.field.answer_string
+    - else
+      Non répondu
+

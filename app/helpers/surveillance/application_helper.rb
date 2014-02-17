@@ -72,10 +72,15 @@ module Surveillance
       )
     end
 
-    def boolean_setting_field_for question, key, builder
-      render partial: "surveillance/field/shared/boolean_option", locals: {
-        question: question, key: key, f: builder
-      }
+    def setting_field_for question, key, type, builder
+      setting = question.field.settings[key]
+
+      render(
+        partial: "surveillance/field/shared/settings/#{ type.to_s }",
+        locals: {
+          question: question, key: key, f: builder, setting: setting
+        }
+      )
     end
   end
 end

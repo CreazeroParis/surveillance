@@ -18,7 +18,7 @@ class Surveillance.QuestionView extends Backbone.View
     answers = @requiredAnswersCount()
 
     @model.set(fields: fields, fieldsToFill: answers)
-    @$(".form-group").removeClass("has-error")
+    @cleanErrors()
 
     @afterAnswerValuesProcessing?()
 
@@ -30,6 +30,9 @@ class Surveillance.QuestionView extends Backbone.View
 
   processFieldValue: ($el) ->
     $el.val()
+
+  cleanErrors: ->
+    @$(".has-error").removeClass("has-error")
 
   refreshErrors: ->
     @$(".form-group").addClass("has-error")

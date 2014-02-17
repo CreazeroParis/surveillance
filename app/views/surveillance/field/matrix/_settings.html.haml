@@ -10,6 +10,6 @@
 
   = link_to_add_fields "Ajouter une question à la matrice", "#matrix-questions-#{ f.object.id }", builder: f, relation: :questions, partial: questions_fields_path
 
-= boolean_setting_field_for(question, :other, f)
+= setting_field_for(question, :other, :boolean, f)
 
-= boolean_setting_field_for(question, :randomize_sub_questions, f)
+= setting_field_for(question, :randomize_sub_questions, :boolean, f)

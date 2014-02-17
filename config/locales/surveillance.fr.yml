@@ -54,17 +54,22 @@ fr:
     field_types:
       text: "Champ texte"
       text_area: "Zone de texte multiligne"
+      number: "Nombre"
       single_choice: "Choix unique"
       multiple_choices: "Choix multiples"
       matrix: "Matrice"
       multiple_choices_matrix: "Matrice à choix multiples"
       select_matrix: "Matrice de sélection"
       order: "Ordonner les réponses"
-      number: "Nombre"
     field:
       errors:
         not_present: must be filled
     settings:
+      number:
+        minimum:
+          admin: "Valeur minimum"
+        maximum:
+          admin: "Valeur maximum"
       single_choice:
         other:
           admin: "Ajouter un champ \"Autre\" ?"

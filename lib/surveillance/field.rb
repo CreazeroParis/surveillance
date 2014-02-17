@@ -6,6 +6,7 @@ module Surveillance
     autoload :Base, "surveillance/field/base"
     autoload :Text, "surveillance/field/text"
     autoload :TextArea, "surveillance/field/text_area"
+    autoload :Number, "surveillance/field/number"
     autoload :SingleChoice, "surveillance/field/single_choice"
     autoload :MultipleChoices, "surveillance/field/multiple_choices"
     autoload :Matrix, "surveillance/field/matrix"
@@ -20,7 +21,7 @@ module Surveillance
 
     mattr_accessor :available_field_types
     @@available_field_types = %w(
-      text text_area single_choice multiple_choices
+      text text_area number single_choice multiple_choices
       matrix multiple_choices_matrix select_matrix order
     )
 

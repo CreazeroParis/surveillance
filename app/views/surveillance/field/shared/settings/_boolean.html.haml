@@ -1,5 +1,4 @@
 = f.fields_for :settings, question.settings.find_or_initialize_by(key: key.to_s) do |fb|
-  - setting = question.field.settings[key]
   .form-group
     .controls
       %label.checkbox
