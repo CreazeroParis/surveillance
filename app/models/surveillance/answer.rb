@@ -34,6 +34,7 @@ module Surveillance
         ids_list
       end
 
+      options.clear
       super(ids)
     end
 

@@ -1,7 +1,7 @@
 .list-item.survey-container{ data: { id: question.id } }
   .list-item-inner
     .name.pull-left.padding5
-      = question.title
+      = question.title.html_safe
 
     .drag-handle.pull-right
       %i.icon-resize-vertical

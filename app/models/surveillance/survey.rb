@@ -10,7 +10,20 @@ module Surveillance
 
     validates_presence_of :title
 
+    scope :includes_all, -> {
+      includes(
+        sections: {
+          questions: [:questions, :options]
+        }
+      )
+    }
     scope :published, -> { where(published: true) }
+
+    scope :all_with_answers, -> {
+      includes(
+        sections: { questions: [:questions, { options: :answers} ] }
+      )
+    }
 
     def closed?
       end_date && end_date < Time.now.to_date

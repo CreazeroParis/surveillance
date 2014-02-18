@@ -1,6 +1,6 @@
 .form-group
   %label.control-label
-    = question.title
+    = question.title.html_safe
 
   - if question.description.presence
     %p.help-block
@@ -21,7 +21,7 @@
             %tr.form-group{ class: ("error" if fa.object.errors.any?), data: { "sub-question-id" => sub_question.id } }
               %td
                 %label.control-label
-                  = sub_question.title
+                  = sub_question.title.html_safe
                 = fa.hidden_field :question_id, value: sub_question.id if fa.object.new_record?
               - fa.collection_check_boxes :option_ids, question.options, :id, :title do |input|
                 %td.controls

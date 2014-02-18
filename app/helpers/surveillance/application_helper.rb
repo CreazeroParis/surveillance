@@ -24,11 +24,9 @@ module Surveillance
 
     # Renders an answer result
     def survey_answer_for attempt, question
-      question.field.attempt = attempt
+      question.field(attempt: attempt, answer: attempt.answer_to(question))
 
-      render partial: question.field.show_path, locals: {
-        question: question
-      }
+      render partial: question.field.show_path, locals: { question: question }
     end
 
     def settings_fields_for builder, question

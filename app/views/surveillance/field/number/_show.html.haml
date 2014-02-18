@@ -1,6 +1,6 @@
 .question
   %span.title
-    = question.title
+    = question.title.html_safe
 
   %strong.answer
     - if question.field.answer

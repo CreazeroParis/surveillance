@@ -2,6 +2,6 @@
   Ajouter un option pour la question
   %strong
     = surround '"' do
-      = question.title
+      = question.title.html_safe
 
 = render partial: 'form', locals: { path: admin_question_options_path(question) }

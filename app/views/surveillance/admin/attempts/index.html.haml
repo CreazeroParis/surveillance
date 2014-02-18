@@ -32,6 +32,8 @@
               = attempt.ip_address
             %td
               = link_to "Voir les réponses", admin_attempt_path(attempt), class: "btn btn-default"
+              = link_to "Supprimer", admin_attempt_path(attempt), class: "btn btn-danger", data: { confirm: t("flashes.surveillance/admin/attempts.destroy.confirm_message"), method: "delete" }
+
 
 
   #recap.tab-pane.fade

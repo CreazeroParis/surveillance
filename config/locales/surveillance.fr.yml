@@ -10,7 +10,10 @@ fr:
       destroy:
         success: "Le questionnaire a bien été supprimé"
         confirm_message: "Voulez-vous vraiment supprimer ce questionnaire ?"
-
+    surveillance/admin/attempts:
+      destroy:
+        success: "La réponse a bien été supprimée"
+        confirm_message: "Voulez-vous vraiment supprimer cette réponse ?"
     surveillance/admin/sections:
       create:
         success: "La section a bien été créée"

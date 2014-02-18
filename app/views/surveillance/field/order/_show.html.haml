@@ -1,8 +1,8 @@
 .form-group
   %label.control-label{ required: question.mandatory }
     = "*" if question.mandatory
-    = question.title
+    = question.title.html_safe
 
 %ul
   - question.field.ordered_answers.each_with_index do |question, index|
-    %li= "#{ index + 1 } : #{ question.title }"
+    %li= "#{ index + 1 } : #{ question.title.html_safe }"

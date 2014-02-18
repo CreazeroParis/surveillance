@@ -1,5 +1,5 @@
 = f.fields_for :answers, (question.field.answer_or_initialize) do |fa|
   = fa.fields_for :content, fa.object.content_or_build do |fc|
-    = fc.input :value, as: :numeric, label: question.title, required: question.mandatory, hint: question.description, input_html: { min: question.field.setting_value(:minimum), max: question.field.setting_value(:maximum) }
+    = fc.input :value, as: :numeric, label: question.title.html_safe, required: question.mandatory, hint: question.description, input_html: { min: question.field.setting_value(:minimum), max: question.field.setting_value(:maximum) }
 
   = fa.hidden_field :question_id, value: question.id if fa.object.new_record?

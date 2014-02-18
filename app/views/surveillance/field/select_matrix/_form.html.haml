@@ -1,7 +1,7 @@
 .form-group
   %label.control-label{ required: question.mandatory }
     = "*" if question.mandatory
-    = question.title
+    = question.title.html_safe
 
   .controls
     %table.table.table-striped.table-bordered.table-rounded
@@ -11,7 +11,7 @@
             %tr.form-group{ class: ("error" if fa.object.errors.any?), data: { "sub-question-id" => sub_question.id } }
               %td
                 %label.control-label
-                  = sub_question.title
+                  = sub_question.title.html_safe
                 = fa.hidden_field :question_id, value: sub_question.id if fa.object.new_record?
               %td
                 = fa.input_field :option_id, collection: question.options, multiple: false, required: question.mandatory

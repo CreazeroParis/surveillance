@@ -27,11 +27,12 @@ module Surveillance
 
     def field options = {}
       attempt = options.fetch(:attempt, nil)
+      answer = options.fetch(:answer, nil)
       rebuild = options.fetch(:rebuild, false)
 
       return @field if !rebuild && @field
 
-      @field = (field_class).new(self, attempt: attempt)
+      @field = (field_class).new(self, attempt: attempt, answer: answer)
     end
 
     def field_class

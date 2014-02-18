@@ -7,9 +7,9 @@ module Surveillance
       attr_writer :answer, :attempt
 
       def initialize question, options = {}
-        attempt = options.fetch(:attempt, nil)
         self.question = question
-        self.attempt = attempt
+        self.attempt = options.fetch(:attempt, nil)
+        self.answer = options.fetch(:answer, nil)
       end
 
       def attempt

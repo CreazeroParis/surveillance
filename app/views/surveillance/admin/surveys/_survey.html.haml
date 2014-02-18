@@ -4,8 +4,8 @@
       = survey.title
 
     .btn-group.pull-right
-      - if (count = survey.attempts.count) > 0
-        = link_to "Voir les #{survey.attempts.count} réponses", admin_survey_attempts_path(survey), class: "btn btn-"
+      - if (count = survey.attempts.length) > 0
+        = link_to "Voir les #{ count } réponses", admin_survey_attempts_path(survey), class: "btn btn-default"
       - else
         .btn.delete-btn Aucune réponse
 

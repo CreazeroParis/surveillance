@@ -1,4 +1,4 @@
-%h3= question.title
+%h3= question.title.html_safe
 %table
   %thead
     %tr
@@ -12,10 +12,10 @@
         %td= "Position #{ index + 1 }"
     - question.questions.each do |sub_question|
       %tr
-        %td= sub_question.title
+        %td= sub_question.title.html_safe
         - sub_question.field.answers.each do |answers_count|
           %td= answers_count || 0
-          
 
 
-          
+
+
