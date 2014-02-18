@@ -25,7 +25,8 @@ module Surveillance
       end
 
       def update
-        if attempt.save
+        attempt.answers.destroy_all # Clean old answers
+        if attempt.update_attributes(attempt_params)
           attempt.complete!
           if survey.last_page_description.presence
             redirect_to complete_response_attempt_path(attempt)
