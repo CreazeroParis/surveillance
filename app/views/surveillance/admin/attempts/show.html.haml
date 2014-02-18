@@ -1,17 +1,57 @@
 .attempt
+  .pull-right
+    = link_to "Retour", admin_survey_attempts_path(attempt.survey), class: "btn btn-primary"
+
   %h2.title
     Questionnaire
-    = attempt.survey.title
-  .pull-right.date
-    Répondu le
-    = l(attempt.created_at)
+    %strong
+      = surround '"' do
+        = attempt.survey.title
+
+  .clearfix
+
+  .attempt-additional-data.well
+    .date
+      = t("surveillance.attempts.answer_date")
+      \:
+      %strong= l(attempt.created_at)
+    .state
+      = t("surveillance.attempts.state")
+      \:
+      %strong= attempt.state_label
+
+    .ip-address
+      = t("surveillance.attempts.ip_address")
+      \:
+      %strong= attempt.ip_address
+
+    .ip-address
+      = t("surveillance.attempts.last_answered_section")
+      \:
+      %strong= survey.sections[attempt.last_answered_section].title
+
+  %hr
+
+  %h2
+    Réponses
+
+  %hr
 
   - survey.sections.each_with_index do |section, index|
-    %h3
-      = section.title
+    .attempt-section{ class: ("not-answered" if index > attempt.last_answered_section) }
+      %h3
+        = section.title
 
-    - section.questions.each do |question|
-      .survey-answer{ class: ("not-answered" if index > attempt.last_answered_section) }
-        = survey_answer_for(attempt, question)
+      - section.questions.each do |question|
+        .survey-answer
+          = survey_answer_for(attempt, question)
+          %br
+          %hr
+          %br
 
-= link_to "Retour", admin_survey_attempts_path(attempt.survey), class: "btn btn-default"
+%br
+%hr
+%br
+= link_to "Retour", admin_survey_attempts_path(attempt.survey), class: "btn btn-primary"
+%br
+%br

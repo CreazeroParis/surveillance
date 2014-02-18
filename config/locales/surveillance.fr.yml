@@ -103,6 +103,7 @@ fr:
       state: "Remplissage"
       answer_date: "Date de réponse"
       ip_address: "Adresse IP"
+      last_answered_section: "Dernière page remplie"
       states:
         empty: "Non commencé"
         partially_filled: "Partiel"
