@@ -4,6 +4,10 @@ class Surveillance.AttemptView extends Backbone.View
     @$lastAnsweredSectionField = @$(".last-answered-section")
     @lastAnsweredSection = @$lastAnsweredSectionField.val()
 
+    # Locks submissions from "Enter" key in text fields
+    @allowSubmission = false
+    @$el.on("submit", _.bind(@ensureSubmissionAllowed, this))
+
     @sectionViews = _.map @$(".survey-section"), (el) =>
       section = new Surveillance.SectionView(el: el)
       @listenTo section, "validated", => @nextSection(section)
@@ -50,7 +54,13 @@ class Surveillance.AttemptView extends Backbone.View
     _.find @sectionViews, (view) -> view.id == id
 
   submit: ->
+    @updateLanstAnsweredSection(_.last(@sectionViews).index)
+    @allowSubmission = true
     @$el.submit()
+
+  ensureSubmissionAllowed: (e) ->
+    console.log "allow allowSubmission : ", @allowSubmission, e
+    @allowSubmission
 
   savePartialAttemptAt: (index) ->
     @updateLanstAnsweredSection(index)

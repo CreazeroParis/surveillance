@@ -14,6 +14,7 @@ module Surveillance
       includes(answers: [:question, :options, :content])
     }
 
+    before_validation :ensure_access_token
     before_validation :filter_required_answers
 
     state_machine :state, initial: :empty do
@@ -22,7 +23,7 @@ module Surveillance
       end
 
       event :complete do
-        transition [:empty, :partially_filled] => :completed
+        transition all => :completed
       end
 
       state :empty do
@@ -49,10 +50,13 @@ module Surveillance
       end
     end
 
-    before_validation :ensure_access_token
-
     def ensure_access_token
       self.access_token ||= Surveillance.unique_token
+    end
+
+    def fill_section index, attributes
+      self.last_answered_section = index.to_i
+      update_attributes(attributes)
     end
 
     def filter_required_answers
@@ -69,7 +73,8 @@ module Surveillance
     end
 
     def answer_to question
-      questions_answers[question.id]
+      id = question.kind_of?(Integer) ? question : question.id
+      questions_answers[id]
     end
 
     def questions_answers
@@ -78,6 +83,20 @@ module Surveillance
 
     def to_param
       access_token
+    end
+
+    def answers_attributes=(attributes)
+      processed = attributes.reduce([]) do |ary, (key, val)|
+        if val[:id].blank? && (answer = answer_to(val[:question_id].to_i))
+          val[:id] = answer.id
+        end
+        ary << val
+      end
+
+      # Reset array so next time we get it, it will be updated
+      @questions_answers = nil
+
+      super(processed)
     end
 
     private

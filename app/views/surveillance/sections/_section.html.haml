@@ -1,0 +1,24 @@
+.survey-section{ style: ("display:none;" if index != attempt.last_answered_section + 1), data: { id: section.id, index: index } }
+  .bloc
+    %h3
+      = section.title
+
+    - if section.description.presence
+      .section-description
+        = section.description.html_safe
+
+    - section.questions.each_with_index do |question, index|
+      = survey_field_for(f, question, index)
+
+  .form-group
+    - if index > 0
+      %button.btn.btn-danger.back-to-previous-section{ type: "button" }
+        Retour à la page précédente
+
+    - if index < (survey.sections.length - 1)
+      %button.btn.btn-primary.validate-section{ type: "button" }
+        Page suivante
+    - else
+      %button.btn.btn-primary.validate-survey{ type: "submit" }
+        Soumettre le questionnaire
+

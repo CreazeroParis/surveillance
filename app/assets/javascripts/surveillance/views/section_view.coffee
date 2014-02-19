@@ -29,8 +29,9 @@ class Surveillance.SectionView extends Backbone.View
       else if $(e.currentTarget).hasClass("validate-section")
         @trigger("validated")
         @trigger("section-complete")
-    else
-      e.preventDefault()
+      else if $(e.currentTarget).hasClass("validate-survey")
+        @trigger("submit-survey")
+    e.preventDefault()
 
 
   firstMatchingBranchRule: ->
@@ -48,3 +49,5 @@ class Surveillance.SectionView extends Backbone.View
       ""
     ) + "View"
 
+  serialize: ->
+    @$("input, select").serialize() + "&section_index=#{ @index }"

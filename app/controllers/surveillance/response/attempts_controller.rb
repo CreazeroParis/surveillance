@@ -2,7 +2,7 @@ module Surveillance
   module Response
     class AttemptsController < Surveillance::Response::BaseController
       def new
-        attempt = if previous_attempt
+        self.attempt = if previous_attempt
           if previous_attempt.completed?
             attempt_already_completed!(previous_attempt) and return
           end
@@ -21,12 +21,12 @@ module Surveillance
 
       def edit
         attempt_already_completed!(attempt) and return if attempt.completed?
+        self.attempt = Surveillance::Attempt.includes_all.find(attempt.id)
         store_attempt!(attempt)
       end
 
       def update
-        attempt.answers.destroy_all # Clean old answers
-        if attempt.update_attributes(attempt_params)
+        if attempt.save
           attempt.complete!
           if survey.last_page_description.presence
             redirect_to complete_response_attempt_path(attempt)
@@ -36,7 +36,7 @@ module Surveillance
         else
           flash[:error] = "Votre participation n'a pas pu être prise en compte.<br>" +
             "Merci de vérifier que tous les champs sont remplis correctement."
-          render "new"
+          render "edit"
         end
       end
 

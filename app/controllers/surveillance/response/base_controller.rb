@@ -12,10 +12,9 @@ module Surveillance
       private
 
       def survey
-        if params[:survey_id]
-          Surveillance::Survey.find(params[:survey_id])
-        elsif attempt && attempt.survey
-          attempt.survey
+        @survey ||= begin
+          survey_id = params[:survey_id] || (attempt && attempt.survey_id)
+          Surveillance::Survey.includes_all.find(survey_id) if survey_id
         end
       end
       helper_method :survey

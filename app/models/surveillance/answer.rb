@@ -34,7 +34,7 @@ module Surveillance
         ids_list
       end
 
-      options.clear
+      options.clear if options.length > 0
       super(ids)
     end
 
@@ -45,7 +45,11 @@ module Surveillance
     def optional_content_not_filled? attributes
       question.field.answer = self
 
-      !question.field.mandatory_content? && !attributes["value"].presence
+      if question.field.mandatory_content?
+        (!question.mandatory && (!attributes["value"].presence))
+      else
+        !attributes["value"].presence
+      end
     end
   end
 end

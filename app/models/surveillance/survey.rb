@@ -13,7 +13,7 @@ module Surveillance
     scope :includes_all, -> {
       includes(
         sections: {
-          questions: [:questions, :options]
+          questions: [:questions, :options, :settings, :branch_rules]
         }
       )
     }
