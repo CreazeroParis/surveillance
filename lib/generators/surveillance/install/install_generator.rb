@@ -1,6 +1,5 @@
 module Surveillance
   class InstallGenerator < Rails::Generators::Base
-    include Generators::Utils::InstanceMethods
     # Copied files come from templates folder
     source_root File.expand_path('../templates', __FILE__)
 

@@ -6,6 +6,7 @@ Surveillance::Engine.routes.draw do
           member do
             match "edit-rules", action: "edit_rules", as: "edit_rules", via: [:put, :patch]
           end
+
           resources :options
           resources :questions
         end
