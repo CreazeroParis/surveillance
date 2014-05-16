@@ -1,21 +1,22 @@
-%h3= question.title.html_safe
-%table
+%h4= question.title.html_safe
+%table.table.table-striped.table-bordered.table-rounded
   %thead
     %tr
       %th
-      - question.options.each do |option|
-        %th= option.title
-  %tbody
-    %tr
-      %td
-      - (0...question.questions.length).each do |index|
-        %td= "Position #{ index + 1 }"
-    - question.questions.each do |sub_question|
-      %tr
-        %td= sub_question.title.html_safe
-        - sub_question.field.answers.each do |answers_count|
-          %td= answers_count || 0
+      - question.questions.each_with_index do |_, index|
+        %th= "Position #{ index + 1 }"
 
+  %tbody
+    - question.questions.each_with_index do |sub_question|
+      %tr.form-group
+        %td
+          %label.control-label
+            = sub_question.title.html_safe
+
+        - sub_question.field.answers.each do |answers_count|
+          %td
+            %label
+              = answers_count || 0
 
 
 
