@@ -1,9 +1,9 @@
 = f.fields_for :settings, question.settings.find_or_initialize_by(key: key.to_s) do |fb|
   .form-group
-    .controls
-      %label.checkbox
-        = fb.check_box :value
-        = setting.admin_label
+    = fb.label :value, setting.admin_label, class: "control-label col-sm-2"
+    .col-sm-10
+      = fb.check_box :value
+
 
     = fb.hidden_field :key, value: key
     = fb.hidden_field :id, value: fb.object.id if fb.object.persisted?

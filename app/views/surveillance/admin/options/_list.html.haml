@@ -1,9 +1,10 @@
-.project-survey-options
-  %h2
-    Options
+.project-survey-options.form-group
+  .col-sm-12
+    %legend
+      Options
 
-  = link_to new_admin_question_option_path(question), class: "btn btn-default" do
-    Ajouter une option
+    = link_to new_admin_question_option_path(question), class: "btn btn-default" do
+      Ajouter une option
 
   .sections-list
     = render partial: "surveillance/admin/options/option", collection: question.options

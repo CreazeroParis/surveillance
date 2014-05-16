@@ -6,7 +6,7 @@
     %p.help-block
       = question.description.html_safe
 
-  .controls
+  .form-controls
     %table.table.table-striped.table-bordered.table-rounded
       %thead
         %tr
@@ -24,6 +24,6 @@
                   = sub_question.title.html_safe
                 = fa.hidden_field :question_id, value: sub_question.id if fa.object.new_record?
               - fa.collection_check_boxes :option_ids, question.options, :id, :title do |input|
-                %td.controls
+                %td.form-controls
                   %label
                     = input.check_box

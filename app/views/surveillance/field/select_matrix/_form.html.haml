@@ -3,7 +3,7 @@
     = "*" if question.mandatory
     = question.title.html_safe
 
-  .controls
+  .form-controls
     %table.table.table-striped.table-bordered.table-rounded
       %tbody
         - question.questions.each do |sub_question|

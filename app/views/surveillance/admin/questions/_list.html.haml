@@ -1,7 +1,17 @@
 .project-survey-questions
-  %h2
+  %legend
     Questions
 
-  = link_to "Créer une question", new_admin_section_question_path(section), class: "btn btn-default"
-  .sections-list
-    = render partial: "surveillance/admin/questions/question", collection: section.questions
+  .row
+    .col-sm-12
+      %p.help-block
+        Ajoutez ici les questions de la section du questionnaire
+      = link_to new_admin_section_question_path(section), class: "btn btn-primary" do
+        %i.fa.fa-plus
+        Ajouter une question
+      %br
+      %br
+  .row
+    .col-sm-12
+      .sections-list
+        = render partial: "surveillance/admin/questions/question", collection: section.questions

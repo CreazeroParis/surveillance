@@ -15,8 +15,12 @@ module Surveillance
   mattr_accessor :admin_authorization_method
   @@admin_authorization_method = nil
 
+  mattr_accessor :admin_base_controller
+  @@admin_base_controller = 'Surveillance::ApplicationController'
+
   mattr_accessor :views_layout
   @@views_layout = nil
+
 
   mattr_accessor :partials
   @@partials = Surveillance::PartialsCollection.new

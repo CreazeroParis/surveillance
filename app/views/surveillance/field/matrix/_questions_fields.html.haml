@@ -1,6 +1,11 @@
 %fieldset.matrix-question
-  = f.input :title, as: :string, label: "" do
-    = f.text_field :title
+  .form-group
+    .col-sm-12
+      .input-group
+        = f.text_field :title, class: "form-control"
 
-    = f.hidden_field :_destroy, data: { destroy: true }
-    = link_to "Supprimer", "#", class: "btn btn-danger", data: { "destroy-field" => true }
+        = f.hidden_field :_destroy, data: { destroy: true }
+        = link_to "#", class: "btn btn-danger input-group-addon", data: { "destroy-field" => true } do
+          %i.fa.fa-times
+          &nbsp;
+          Supprimer

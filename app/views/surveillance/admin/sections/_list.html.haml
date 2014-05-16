@@ -1,7 +1,13 @@
 .survey-sections
-  %h2
+  %legend
     Sections
 
-  = link_to "Créer une section", new_admin_survey_section_path(survey), class: "btn btn-default"
+  = link_to new_admin_survey_section_path(survey), class: "btn btn-primary" do
+    %i.fa.fa-plus
+    Ajouter une section
+
+  %br
+  %br
+
   .sections-list
     = render partial: "surveillance/admin/sections/section", collection: survey.sections

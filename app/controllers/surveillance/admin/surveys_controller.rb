@@ -9,12 +9,10 @@ module Surveillance
 
       def create
         if survey.save
-          # flash[:success] = flash_message(:success)
-          flash[:success] = "Yeah, it works"
+          flash[:success] = flash_message(:success)
           redirect_to edit_admin_survey_path(survey)
         else
-          # flash[:error] = flash_message(:error)
-          flash[:error] = "Didn't work !"
+          flash[:error] = flash_message(:error)
           render "new"
         end
       end

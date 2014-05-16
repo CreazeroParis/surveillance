@@ -1,15 +1,18 @@
 - questions_fields_path = Surveillance::Field::Matrix.questions_fields_path
 
-.matrix-questions{ id: "matrix-questions-#{ f.object.id }", data: { collection: true } }
-
-  %h2
-    Questions de la matrice
-
-  = f.fields_for :questions do |fq|
-    = render partial: questions_fields_path, locals: { f: fq } if fq.object
-
-  = link_to_add_fields "Ajouter une question à la matrice", "#matrix-questions-#{ f.object.id }", builder: f, relation: :questions, partial: questions_fields_path
-
 = setting_field_for(question, :other, :boolean, f)
 
 = setting_field_for(question, :randomize_sub_questions, :boolean, f)
+
+.form-group.matrix-questions{ id: "matrix-questions-#{ f.object.id }", data: { collection: true } }
+  .col-sm-12
+    %legend
+      Questions de la matrice
+
+    %p.help-block
+      Ajoutez ici les sous-questions de la matrice
+
+    = f.fields_for :questions do |fq|
+      = render partial: questions_fields_path, locals: { f: fq } if fq.object
+
+    = link_to_add_fields "<i class=\"fa fa-plus\"></i>&nbsp;Ajouter une question à la matrice", "#matrix-questions-#{ f.object.id }", builder: f, relation: :questions, partial: questions_fields_path

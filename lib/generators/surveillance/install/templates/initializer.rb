@@ -14,6 +14,10 @@ Surveillance.config do |config|
   #
   # config.views_layout = "survey"
 
+  # Change Admin base controller
+  #
+  # config.admin_base_controller = 'AdminController'
+
   # Register field partials to allow overriding field rendering from admin
   #
   # Don't forget to add the registered partial view in :

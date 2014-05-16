@@ -1,19 +1,30 @@
-%fieldset.question-branch-rule
-  = f.input :condition do
-    .pull-left
-      = f.select :condition, Surveillance.options_for(question.field.available_branch_conditions, "branch_conditions")
-    - if question.options.length > 0
-      .pull-left.answers-options-list
+%fieldset.question-branch-rule.form-group
+  .col-sm-10
+    = f.input :condition do
+      .pull-left
+        = f.input_field :condition, collection: Surveillance.options_for(question.field.available_branch_conditions, "branch_conditions"), class: "form-control"
+
+      - if question.options.length > 0
         - if question.questions.length > 0
-          = f.input_field :sub_question_id, collection: question.questions
-        avec
-        = f.input_field :option_id, collection: question.field.options_list
+          .pull-left
+            = f.input_field :sub_question_id, collection: question.questions, class: "form-control"
+        .pull-left
+          &nbsp;
+          avec
+          &nbsp;
+        .pull-left
+          = f.input_field :option_id, collection: question.field.options_list, class: "form-control"
 
-  = f.input :action do
-    .pull-left
-      = f.select :action, Surveillance.options_for(question.field.available_branch_actions, "branch_actions")
-    .pull-left.sections-list
-      = f.input_field :section_id, collection: question.survey.sections
+        .clearfix
 
-  = f.hidden_field :_destroy, data: { destroy: true }
-  = link_to "Supprimer", "#", class: "btn btn-danger", data: { "destroy-field" => true }
+    = f.input :action do
+      .pull-left
+        = f.input_field :action, collection: Surveillance.options_for(question.field.available_branch_actions, "branch_actions"), class: "form-control"
+      .pull-left.sections-list
+        = f.input_field :section_id, collection: question.survey.sections, class: "form-control"
+
+  .col-sm-2
+    = f.hidden_field :_destroy, data: { destroy: true }
+    = link_to "#", class: "btn btn-danger", data: { "destroy-field" => true } do
+      %i.fa.fa-times
+      &nbsp;Supprimer

@@ -59,7 +59,7 @@ module Surveillance
         render partial: partial_path, locals: locals
       end
 
-      link_to label, target, class: "btn btn-primary", data: {
+      link_to label.html_safe, target, class: "btn btn-primary", data: {
         id: id, fields: fields.gsub("\n", ""), toggle: "new-field"
       }
     end

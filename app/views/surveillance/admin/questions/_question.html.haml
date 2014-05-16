@@ -1,5 +1,5 @@
-.list-item.survey-container{ data: { id: question.id } }
-  .list-item-inner
+.panel.panel-default.list-item.survey-container{ data: { id: question.id } }
+  .panel-heading.list-item-inner
     .name.pull-left.padding5
       = question.title.html_safe
 
@@ -7,23 +7,27 @@
       %i.icon-resize-vertical
 
     .btn-group.pull-right
-      %button.btn.btn-notice{ type: "button", data: { toggle: "collapse", target: "#question-branch-rules-#{ question.id }" } }
+      %button.btn.btn-default{ type: "button", data: { toggle: "collapse", target: "#question-branch-rules-#{ question.id }" } }
         Actions conditionnelles
-      = link_to "Supprimer", admin_question_path(question), class: "btn btn-danger delete-btn", method: 'delete'
+
       = link_to "Modifier", edit_admin_question_path(question), class: "btn btn-primary"
+
+      = link_to admin_question_path(question), class: "btn btn-danger delete-btn", method: 'delete', data: { confirm: "Êtes-vous sûrs de bien vouloir supperimer cette question ?" } do
+        %i.fa.fa-times
+        Supprimer
 
     .clearfix
 
-    .collapse{ id: "question-branch-rules-#{ question.id }" }
-      = simple_form_for [:admin, question], url: edit_rules_admin_question_path(question), html: { class: "form-horizontal" } do |f|
-        .branch-rules{ id: "branch-rules-#{ f.object.id }" }
-          = f.fields_for :branch_rules do |fbr|
-            = render partial: question.field.rules_form_path, locals: { f: fbr, question: question } if fbr.object
+  .panel-body.collapse{ id: "question-branch-rules-#{ question.id }" }
+    = simple_form_for [:admin, question], url: edit_rules_admin_question_path(question), html: { class: "form-horizontal" } do |f|
+      .branch-rules{ id: "branch-rules-#{ f.object.id }" }
+        = f.fields_for :branch_rules do |fbr|
+          = render partial: question.field.rules_form_path, locals: { f: fbr, question: question } if fbr.object
 
-          = link_to_add_fields "Ajouter une action conditionnelle", "#branch-rules-#{ f.object.id }", builder: f, relation: :branch_rules, partial: question.field.rules_form_path, locals: { question: question }
+        = link_to_add_fields "Ajouter une action conditionnelle", "#branch-rules-#{ f.object.id }", builder: f, relation: :branch_rules, partial: question.field.rules_form_path, locals: { question: question }
 
 
-        .form-group
-          %button.btn.btn-primary{ type: "submit" }
-            Mettre à jour les actions
-          = link_to "Annuler", "", class: "btn btn-danger"
+      .form-group.form-actions
+        %button.btn.btn-primary{ type: "submit" }
+          Mettre à jour les actions
+        = link_to "Annuler", "", class: "btn btn-danger"
