@@ -26,7 +26,7 @@ module Surveillance
         "Where would you like to mount the Surveillance engine ? [/surveillance]"
       ).presence || '/surveillance'
 
-      gsub_file "config/routes.rb", /glysellin_at \'\/?.*\'/, ''
+      gsub_file "config/routes.rb", /mount Surveillance::Engine.*\'/, ''
 
       path = mount_path.match(/^\//) ? mount_path : "/#{ mount_path }"
       route "mount Surveillance::Engine => '#{ path }'"

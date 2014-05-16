@@ -19,6 +19,6 @@
       %button.btn.btn-primary.validate-section{ type: "button" }
         Page suivante
     - else
-      %button.btn.btn-primary.validate-survey{ type: "submit" }
+      %button.btn.btn-primary.validate-survey{ type: "submit", autocomplete: "off", data: { "loading-text" => "Envoi en cours ..." } }
         Soumettre le questionnaire
 

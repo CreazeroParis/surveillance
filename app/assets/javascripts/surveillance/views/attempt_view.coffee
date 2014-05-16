@@ -36,7 +36,9 @@ class Surveillance.AttemptView extends Backbone.View
     @transition(current, view)
 
   transition: (currentView, nextSection) ->
-    currentView.$el.fadeOut 200, -> nextSection.$el.fadeIn(200)
+    currentView.$el.fadeOut 200, ->
+      nextSection.$el.fadeIn(200)
+      $.scrollTo(nextSection.$el, 200, offset: -60)
 
   nextFor: (view) ->
     _.reduce(@sectionViews, @nextIterator(view), null)
@@ -57,9 +59,9 @@ class Surveillance.AttemptView extends Backbone.View
     @updateLanstAnsweredSection(_.last(@sectionViews).index)
     @allowSubmission = true
     @$el.submit()
+    @$(".validate-survey").button("loading")
 
   ensureSubmissionAllowed: (e) ->
-    console.log "allow allowSubmission : ", @allowSubmission, e
     @allowSubmission
 
   savePartialAttemptAt: (index) ->
