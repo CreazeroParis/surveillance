@@ -17,6 +17,7 @@ module Surveillance
         }
       )
     }
+
     scope :published, -> { where(published: true) }
 
     scope :all_with_answers, -> {

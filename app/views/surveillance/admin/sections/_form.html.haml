@@ -4,7 +4,7 @@
   = f.input :description, input_html: { rows: 5 }
 
   - unless section.new_record?
-    = render partial: "surveillance/admin/questions/list"
+    = render partial: "surveillance/admin/questions/list", locals: { f: f }
 
   .form-group.form-actions
     %button.btn.btn-primary{ type: "submit" }

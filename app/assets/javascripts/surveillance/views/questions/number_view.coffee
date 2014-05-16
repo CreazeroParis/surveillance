@@ -3,13 +3,14 @@ class Surveillance.NumberView extends Surveillance.QuestionView
     "change .spinner": "processAnswerValues"
 
   beforeInitialize: ->
-    @$input = @$el.find("input[type=number]")
+    @$input = @$el.find("input[type='number'], input[type='text']")
 
   processAnswerValues: ->
     @model.set(value: @processFieldValue())
     @cleanErrors()
 
   processFieldValue: ->
+    console.log @$input.val()
     (value = @$input.val()) and parseInt(value, 10)
 
   buildModel: (options) ->

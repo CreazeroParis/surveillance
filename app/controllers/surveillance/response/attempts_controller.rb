@@ -26,7 +26,7 @@ module Surveillance
       end
 
       def update
-        if attempt.save
+        if attempt.save!
           attempt.complete!
           if survey.last_page_description.presence
             redirect_to complete_response_attempt_path(attempt)

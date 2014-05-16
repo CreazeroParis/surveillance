@@ -14,4 +14,4 @@
   .row
     .col-sm-12
       .sections-list
-        = render partial: "surveillance/admin/questions/question", collection: section.questions
+        = render partial: "surveillance/admin/questions/question", collection: section.questions, locals: { f: f }

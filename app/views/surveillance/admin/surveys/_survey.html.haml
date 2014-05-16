@@ -1,9 +1,18 @@
-.list-item.survey-container
-  .list-item-inner
+.panel.panel-default.list-item.survey-container
+  .panel-heading.list-item-inner
     .name.pull-left.padding5
       = survey.title
 
     .btn-group.pull-right
+
+      .btn
+        - if survey.published
+          .pull-left.label.label-success
+            Publié
+        - else
+          .pull-left.label.label-danger
+            Non Publié
+
       - if (count = survey.attempts.length) > 0
         = link_to "Voir les #{ count } réponses", admin_survey_attempts_path(survey), class: "btn btn-default"
       - else

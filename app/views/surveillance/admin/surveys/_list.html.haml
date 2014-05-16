@@ -2,7 +2,12 @@
   %h2
     Sondages
 
-  = link_to "Créer un sondage", new_admin_survey_path, class: "btn btn-default"
+  = link_to new_admin_survey_path, class: "btn btn-primary" do
+    %i.fa.fa-plus
+    Créer un sondage
+
+  %br
+  %br
 
   .surveys-list
     = render partial: "survey", collection: surveys

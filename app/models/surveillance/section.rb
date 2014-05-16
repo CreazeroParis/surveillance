@@ -6,6 +6,7 @@ module Surveillance
     has_many :questions, -> { ordered }, as: :parent,
       class_name: "Surveillance::Question", dependent: :destroy,
       inverse_of: :parent
+    accepts_nested_attributes_for :questions
 
     validates_presence_of :title, :position
 

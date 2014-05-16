@@ -9,12 +9,14 @@
     / = f.input :last_page_description, as: :rich, input_html: { rows: 5 }
     = f.input :last_page_description, input_html: { rows: 5 }
 
-  - unless survey.new_record?
-    = render partial: "surveillance/admin/sections/list"
+    - unless survey.new_record?
+      = render partial: "surveillance/admin/sections/list"
 
-  .form-group.form-actions
-    %button.btn.btn-primary{ type: "submit" }
-      = survey.new_record? ? "Ajouter" : "Mettre à jour"
+    .form-group.form-actions
+      %button.btn.btn-primary{ type: "submit" }
+        %i.fa.fa-check
+        = survey.new_record? ? "Ajouter" : "Mettre à jour"
 
-    = link_to admin_surveys_path, class: "btn btn-default" do
-      Retour
+      = link_to admin_surveys_path, class: "btn btn-default" do
+        %i.fa.fa-arrow-left
+        Retour

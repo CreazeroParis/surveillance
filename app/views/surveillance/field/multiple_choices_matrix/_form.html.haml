@@ -1,5 +1,6 @@
 .form-group
-  %label.control-label
+  %label.control-label{ required: question.mandatory }
+    = "*" if question.mandatory
     = question.title.html_safe
 
   - if question.description.presence
@@ -16,14 +17,17 @@
               = option.title
 
       %tbody
-        - question.questions.each do |sub_question|
+        - question.field.ordered_sub_questions.each do |sub_question|
           = f.fields_for :answers, (sub_question.field.answer_or_initialize_for(f.object)) do |fa|
-            %tr.form-group{ class: ("error" if fa.object.errors.any?), data: { "sub-question-id" => sub_question.id } }
+            %tr.form-group{ class: ("has-error" if fa.object.errors.any?), data: { "sub-question-id" => sub_question.id } }
               %td
                 %label.control-label
                   = sub_question.title.html_safe
                 = fa.hidden_field :question_id, value: sub_question.id if fa.object.new_record?
-              - fa.collection_check_boxes :option_ids, question.options, :id, :title do |input|
+
+              = fa.collection_check_boxes :option_ids, question.options, :id, :title do |input|
                 %td.form-controls
                   %label
                     = input.check_box
+
+

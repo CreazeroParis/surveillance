@@ -1,6 +1,8 @@
 %h1
   = "Sondage #{ survey.title }"
-  = link_to "Retour à la liste des sondages", admin_surveys_path, class: "btn btn-default pull-right"
+  = link_to admin_surveys_path, class: "btn btn-default pull-right" do
+    %i.fa.fa-arrow-left
+    Retour à la liste des sondages
 
 %ul.nav.nav-tabs
   %li.active
@@ -9,7 +11,6 @@
   %li
     %a{"data-toggle" => "tab", :href => "#recap"}
       Recapitulatif
-
 
 .tab-content.inside-shadow
 
@@ -32,7 +33,9 @@
               = attempt.ip_address
             %td
               = link_to "Voir les réponses", admin_attempt_path(attempt), class: "btn btn-default"
-              = link_to "Supprimer", admin_attempt_path(attempt), class: "btn btn-danger", data: { confirm: t("flashes.surveillance/admin/attempts.destroy.confirm_message"), method: "delete" }
+              = link_to admin_attempt_path(attempt), class: "btn btn-danger", data: { confirm: t("flashes.surveillance/admin/attempts.destroy.confirm_message"), method: "delete" } do
+                %i.fa.fa-times
+                Supprimer
 
 
 
@@ -42,7 +45,3 @@
       %h1= section.title
       - section.questions.each do |question|
         = survey_overview_for question
-
-
-
-

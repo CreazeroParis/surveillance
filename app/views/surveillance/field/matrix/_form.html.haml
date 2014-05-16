@@ -17,7 +17,7 @@
               = option.title
 
       %tbody
-        - question.ordered_sub_questions.each do |sub_question|
+        - question.field.ordered_sub_questions.each do |sub_question|
           = f.fields_for :answers, (sub_question.field.answer_or_initialize_for(f.object)) do |fa|
             %tr.form-group{ class: ("error" if fa.object.errors.any?), data: { "sub-question-id" => sub_question.id } }
               %td
@@ -29,9 +29,9 @@
                   %label
                     = fa.radio_button :option_id, option.id
 
-        = f.fields_for :answers, (question.field.answer_or_initialize_for(f.object)) do |fa|
-          %tr.form-group
-            - if question.field.display_other_field?(question)
+        - if question.field.display_other_field?(question)
+          = f.fields_for :answers, (question.field.answer_or_initialize_for(f.object)) do |fa|
+            %tr.form-group
               %td
                 = fa.radio_button :option_id, "other", checked: fa.object.other_choosed
                 = question.field.settings.other.label

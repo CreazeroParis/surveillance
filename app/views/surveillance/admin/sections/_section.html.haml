@@ -8,7 +8,9 @@
 
     .pull-right
       = link_to "Modifier", edit_admin_section_path(section), class: "btn btn-primary"
-      = link_to "Supprimer", admin_section_path(section), class: "btn btn-danger delete-btn", method: 'delete', data: { confirm: "Êtes-vous sûrs de vouloir supprimer cette section ?" }
 
+      = link_to admin_section_path(section), class: "btn btn-danger delete-btn", method: 'delete', data: { confirm: "Êtes-vous sûrs de vouloir supprimer cette section ?" } do
+        %i.fa.fa-times
+        Supprimer
 
     .clearfix

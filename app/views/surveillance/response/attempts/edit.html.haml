@@ -12,4 +12,4 @@
 
   .survey-sections
     - survey.sections.each_with_index do |section, index|
-      = render partial: "surveillance/sections/section", locals: { survey: survey, section: section, index: index, attempt: attempt }
+      = render partial: "surveillance/sections/section", locals: { survey: survey, section: section, index: index, attempt: attempt, f: f }

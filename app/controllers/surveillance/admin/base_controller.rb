@@ -7,7 +7,6 @@ module Surveillance
         helper Surveillance::ApplicationHelper
       end
 
-
       if Surveillance.admin_authorization_method
         before_filter Surveillance.admin_authorization_method
       end

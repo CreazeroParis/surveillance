@@ -9,6 +9,10 @@ module Surveillance
         false
       end
 
+      def view_name
+        "order"
+      end
+
       def present?
         question.questions.map(&:field).all? do |field|
           field.answer.content.presence

@@ -9,6 +9,10 @@ module Surveillance
         end
       end
 
+      def overview_path
+        "surveillance/field/single_choice/overview"
+      end
+
       def other_option
         Option.new(title: settings.other.label)
       end

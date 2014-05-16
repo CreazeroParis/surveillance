@@ -6,9 +6,12 @@
 .survey-order-field
   - question.questions.each_with_index do |sub_question, index|
     = f.fields_for :answers, (sub_question.field.answer_or_initialize_for(f.object)) do |fa|
-      .order-item
-        = sub_question.title.html_safe
-        = fa.hidden_field :question_id, value: sub_question.id if fa.object.new_record?
-        = fa.fields_for :content, Surveillance::AnswerContent.new do |fc|
-          = fc.hidden_field :value, value: index, class: "sub-question-input"
-        .pull-right.i.icon-resize-vertical
+      .panel.panel-default.orderable-item
+        .panel-heading
+          .pull-left.fa.fa-arrows
+
+          = sub_question.title.html_safe
+          = fa.hidden_field :question_id, value: sub_question.id if fa.object.new_record?
+          = fa.fields_for :content, Surveillance::AnswerContent.new do |fc|
+            = fc.hidden_field :value, value: index, class: "sub-question-input"
+

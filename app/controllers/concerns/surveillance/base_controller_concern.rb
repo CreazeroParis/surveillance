@@ -8,8 +8,6 @@ module Surveillance
           strategy DecentExposure::StrongParametersStrategy
         end
       end
-
-      layout Surveillance.views_layout if Surveillance.views_layout
     end
 
     protected
