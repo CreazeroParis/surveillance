@@ -1,4 +1,4 @@
-= f.fields_for :settings, question.settings.find_or_initialize_by(key: key.to_s) do |fb|
+= f.fields_for :settings, question.settings.where(key: key.to_s).first_or_initialize do |fb|
   = fb.input :value, as: :numeric, label: setting.admin_label, required: false
 
   = fb.hidden_field :key, value: key

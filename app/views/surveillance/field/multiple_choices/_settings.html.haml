@@ -1,4 +1,4 @@
-= f.fields_for :settings, question.settings.find_or_initialize_by(key: "other") do |fo|
+= f.fields_for :settings, question.settings.where(key: "other").first_or_initialize do |fo|
   - other = question.field.settings.other
   .form-group
     .form-controls
@@ -9,7 +9,7 @@
     = fo.hidden_field :key, value: :other
     = fo.hidden_field :id, value: fo.object.id if fo.object.persisted?
 
-= f.fields_for :settings, question.settings.find_or_initialize_by(key: "randomize") do |fr|
+= f.fields_for :settings, question.settings.where(key: "randomize").first_or_initialize do |fr|
   - randomize = question.field.settings.randomize
   .form-group
     .form-controls

@@ -9,8 +9,8 @@ module Surveillance
 
     belongs_to :parent, polymorphic: true, inverse_of: :questions
 
-    has_many :options, -> { ordered }, class_name: "Surveillance::Option",
-      dependent: :destroy
+    has_many :options, class_name: "Surveillance::Option",
+      dependent: :destroy, order: 'surveillance_options.id ASC'
     accepts_nested_attributes_for :options, allow_destroy: :true
 
     has_many :answers, class_name: "Surveillance::Answer", dependent: :destroy

@@ -3,8 +3,7 @@ module Surveillance
     class AttemptsController < Surveillance::Admin::BaseController
       expose(:survey, model: Surveillance::Survey, finder_parameter: :survey_id)
       expose(:attempts) { survey.attempts }
-      expose(:attempt,  model: Surveillance::Attempt, attributes: :attempt_params,
-        finder: :find_by_access_token)
+      expose(:attempt,  model: Surveillance::Attempt, attributes: :attempt_params)
 
       def index
         self.attempts = attempts.includes_all

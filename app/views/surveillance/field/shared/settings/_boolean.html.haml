@@ -1,4 +1,4 @@
-= f.fields_for :settings, question.settings.find_or_initialize_by(key: key.to_s) do |fb|
+= f.fields_for :settings, question.settings.where(key: key.to_s).first_or_initialize do |fb|
   .form-group
     = fb.label :value, setting.admin_label, class: "control-label col-sm-2"
     .col-sm-10
