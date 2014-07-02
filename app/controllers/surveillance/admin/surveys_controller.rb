@@ -18,7 +18,7 @@ module Surveillance
       end
 
       def update
-        if survey.update_attributes(survey_params)
+        if survey.save
           flash[:success] = flash_message(:success)
           redirect_to edit_admin_survey_path(survey)
         else

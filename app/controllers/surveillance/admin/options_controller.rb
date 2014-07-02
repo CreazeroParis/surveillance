@@ -19,7 +19,7 @@ module Surveillance
       end
 
       def update
-        if option.update_attributes(options_params)
+        if option.save
           flash[:success] = flash_message(:success)
           redirect_to edit_admin_question_path(option.question)
         else

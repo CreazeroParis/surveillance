@@ -21,7 +21,7 @@ module Surveillance
       end
 
       def update
-        if section.update_attributes(section_params)
+        if section.save
           flash[:success] = flash_message(:success)
           redirect_to edit_admin_section_path(section)
         else
