@@ -1,6 +1,8 @@
 module Surveillance
   module Response
     class AttemptsController < Surveillance::Response::BaseController
+      include Surveillance::AttemptsManagementConcern
+
       def new
         self.attempt = if previous_attempt
           if previous_attempt.completed?
@@ -41,37 +43,6 @@ module Surveillance
       end
 
       def complete
-      end
-
-      private
-
-      def cookie_key
-        "survey-access-token-#{ survey.id }"
-      end
-
-      def previous_attempt
-        @previous_attempt ||= if (token = cookies[cookie_key])
-          Surveillance::Attempt.find_by_access_token(token)
-        elsif (attempt = Surveillance::Attempt.find_by_ip_address(request.remote_ip))
-          store_attempt!(attempt)
-          attempt
-        end
-      end
-
-      def store_attempt! attempt
-        cookies[cookie_key] = {
-          value: attempt.access_token,
-          expires: 1.year.from_now
-        }
-      end
-
-      def attempt_already_completed! attempt
-        if (callback = Surveillance.attempt_already_registered_callback)
-          instance_exec(attempt, &callback)
-        else
-          flash[:error] = t("surveillance.attempts.errors.already_completed")
-          redirect_to surveys_path and return
-        end
       end
     end
   end

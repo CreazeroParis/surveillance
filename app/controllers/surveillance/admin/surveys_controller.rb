@@ -1,7 +1,7 @@
 module Surveillance
   module Admin
     class SurveysController < Surveillance::Admin::BaseController
-      expose(:surveys) { Surveillance::Survey.order("updated_at DESC") }
+      expose(:surveys) { Surveillance::Survey.order("created_at DESC") }
       expose(:survey, attributes: :survey_params, model: Surveillance::Survey)
 
       def index

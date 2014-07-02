@@ -7,7 +7,7 @@ module Surveillance
     has_many :questions, through: :sections
 
     has_many :attempts, class_name: "Surveillance::Attempt",
-      foreign_key: "survey_id", dependent: :destroy
+      foreign_key: "survey_id", dependent: :destroy, inverse_of: :survey
 
     validates_presence_of :title
 
