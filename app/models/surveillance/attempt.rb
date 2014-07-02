@@ -5,10 +5,12 @@ module Surveillance
     has_many :answers, class_name: "Surveillance::Answer",
       foreign_key: 'attempt_id', dependent: :destroy, inverse_of: :attempt,
       before_add: :set_attempt_on_answers
-
-    belongs_to :survey, class_name: "Surveillance::Survey"
-
     accepts_nested_attributes_for :answers
+
+    belongs_to :survey, class_name: "Surveillance::Survey",
+               inverse_of: :attempts
+
+    belongs_to :user, polymorphic: true
 
     scope :includes_all, -> {
       includes(answers: [:question, :options, :content])
@@ -86,17 +88,21 @@ module Surveillance
     end
 
     def answers_attributes=(attributes)
-      processed = attributes.reduce([]) do |ary, (key, val)|
+      processed = attributes.each_with_object({}) do |(key, val), hash|
         if val[:id].blank? && (answer = answer_to(val[:question_id].to_i))
           val[:id] = answer.id
         end
-        ary << val
+
+        hash[key] = val
       end
 
-      # Reset array so next time we get it, it will be updated
+      # Clear `@questions_answers` cache so next time we call questions_answers
+      # hash it will be fetched with latest data
       @questions_answers = nil
 
-      super(processed)
+      assign_nested_attributes_for_collection_association(
+        :answers, processed, mass_assignment_options
+      )
     end
 
     private

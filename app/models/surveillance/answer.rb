@@ -2,6 +2,7 @@ module Surveillance
   class Answer < ActiveRecord::Base
     belongs_to :attempt, class_name: "Surveillance::Attempt", inverse_of: :answers
     belongs_to :question, class_name: "Surveillance::Question"
+
     has_and_belongs_to_many :options, class_name: "Surveillance::Option",
       join_table: "surveillance_answers_options"
 
@@ -21,8 +22,8 @@ module Surveillance
       option_ids.first
     end
 
-    def option_id=(val)
-      self.option_ids = [val]
+    def option_id=(id)
+      self.option_ids = [id]
     end
 
     def option_ids=(ids)
