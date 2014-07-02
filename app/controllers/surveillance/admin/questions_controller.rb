@@ -22,7 +22,7 @@ module Surveillance
       end
 
       def update
-        if question.update_attributes(question_params)
+        if question.save
           flash[:success] = flash_message(:success)
           redirect_to edit_admin_question_path(question)
         else
