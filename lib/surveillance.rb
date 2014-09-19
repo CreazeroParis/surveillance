@@ -21,12 +21,14 @@ module Surveillance
   mattr_accessor :views_layout
   @@views_layout = nil
 
-
   mattr_accessor :partials
   @@partials = Surveillance::PartialsCollection.new
 
   mattr_accessor :attempt_already_registered_callback
   @@attempt_already_registered_callback = nil
+
+  mattr_accessor :surveys_root_path
+  @@surveys_root_path = nil
 
   class << self
     def table_name_prefix

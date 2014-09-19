@@ -39,12 +39,12 @@ module Surveillance
       }
     end
 
-    def attempt_already_completed! attempt
+    def attempt_already_completed!(attempt)
       if (callback = Surveillance.attempt_already_registered_callback)
         instance_exec(attempt, &callback)
       else
         flash[:error] = t("surveillance.attempts.errors.already_completed")
-        redirect_to surveys_path and return
+        redirect_to surveys_root_path
       end
     end
   end

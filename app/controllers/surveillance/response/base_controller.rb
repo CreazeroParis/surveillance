@@ -9,6 +9,8 @@ module Surveillance
 
       before_filter :survey_closed
 
+      helper_method :surveys_root_path
+
       private
 
       def survey
@@ -26,7 +28,15 @@ module Surveillance
       def survey_closed
         if survey.closed?
           flash[:error] = "Ce sondage est maintenant fermé"
-          redirect_to surveys_path
+          redirect_to surveys_root_path
+        end
+      end
+
+      def surveys_root_path
+        if (config = Surveillance.surveys_root_path)
+          instance_exec(&config)
+        else
+          surveys_path
         end
       end
     end

@@ -38,4 +38,14 @@ Surveillance.config do |config|
   #   flash[:error] = "You already completed this survey"
   #   redirect_to(root_path)
   # }
+
+  # Surveys root path used when redirecting from a survey
+  # Executed in the context of the controller / view where it is called
+  # Note that the controller is inside the Surveillance Engine, you need
+  # to call the root on the `main_app` object if you need to redirect to
+  # your app
+  #
+  # Default : nil
+  #
+  # config.surveys_root_path = -> { main_app.root_path }
 end
