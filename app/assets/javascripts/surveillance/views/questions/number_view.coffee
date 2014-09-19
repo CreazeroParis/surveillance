@@ -10,7 +10,6 @@ class Surveillance.NumberView extends Surveillance.QuestionView
     @cleanErrors()
 
   processFieldValue: ->
-    console.log @$input.val()
     (value = @$input.val()) and parseInt(value, 10)
 
   buildModel: (options) ->

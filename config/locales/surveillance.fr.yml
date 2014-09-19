@@ -53,6 +53,12 @@ fr:
       sort:
         success: "Les options ont bien été réordonnés"
 
+    surveillance/attempts/response:
+      update:
+        error: |
+          Votre participation n'a pas pu être prise en compte.<br>
+          Merci de vérifier que tous les champs sont remplis correctement.
+
   surveillance:
     field_types:
       text: "Champ texte"

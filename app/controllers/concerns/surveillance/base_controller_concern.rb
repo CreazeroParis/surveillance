@@ -3,6 +3,8 @@ module Surveillance
     extend ActiveSupport::Concern
 
     included do
+      helper_method :surveys_root_path
+
       decent_configuration do
         if defined?(ActiveModel::ForbiddenAttributesProtection)
           strategy DecentExposure::StrongParametersStrategy
@@ -12,7 +14,7 @@ module Surveillance
 
     protected
 
-    def flash_message type
+    def flash_message(type)
       I18n.t("flashes.#{ flash_key }.#{ params[:action] }.#{ type }")
     end
 
@@ -22,6 +24,14 @@ module Surveillance
 
     def stong_parameters?
       defined?(ActiveModel::ForbiddenAttributesProtection)
+    end
+
+    def surveys_root_path
+      if (config = Surveillance.surveys_root_path)
+        instance_exec(&config)
+      else
+        surveys_path
+      end
     end
   end
 end

@@ -37,8 +37,7 @@ module Surveillance
             redirect_to survey_path(attempt.survey)
           end
         else
-          flash[:error] = "Votre participation n'a pas pu être prise en compte.<br>" +
-            "Merci de vérifier que tous les champs sont remplis correctement."
+          flash[:error] = flash_message(:error)
           render "edit"
         end
       end

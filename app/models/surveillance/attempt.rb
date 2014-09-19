@@ -100,9 +100,7 @@ module Surveillance
       # hash it will be fetched with latest data
       @questions_answers = nil
 
-      assign_nested_attributes_for_collection_association(
-        :answers, processed, mass_assignment_options
-      )
+      assign_nested_attributes_for_collection_association(:answers, processed)
     end
 
     private

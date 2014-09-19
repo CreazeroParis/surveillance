@@ -31,6 +31,7 @@ class Surveillance.SectionView extends Backbone.View
         @trigger("section-complete")
       else if $(e.currentTarget).hasClass("validate-survey")
         @trigger("submit-survey")
+
     e.preventDefault()
 
 

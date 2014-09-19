@@ -9,9 +9,9 @@ module Surveillance
 
       before_filter :survey_closed
 
-      helper_method :surveys_root_path
+      helper_method :survey
 
-      private
+      protected
 
       def survey
         @survey ||= begin
@@ -19,7 +19,6 @@ module Surveillance
           Surveillance::Survey.includes_all.find(survey_id) if survey_id
         end
       end
-      helper_method :survey
 
       def attempt_params
         stong_parameters? ? params.require(:attempt).permit! : params[:attempt]
@@ -29,14 +28,6 @@ module Surveillance
         if survey.closed?
           flash[:error] = "Ce sondage est maintenant fermé"
           redirect_to surveys_root_path
-        end
-      end
-
-      def surveys_root_path
-        if (config = Surveillance.surveys_root_path)
-          instance_exec(&config)
-        else
-          surveys_path
         end
       end
     end
