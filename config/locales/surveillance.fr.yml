@@ -110,6 +110,7 @@ fr:
       answer_date: "Date de réponse"
       ip_address: "Adresse IP"
       last_answered_section: "Dernière page remplie"
+      no_last_answered_section: "Aucune page remplie"
       states:
         empty: "Non commencé"
         partially_filled: "Partiel"

@@ -28,7 +28,12 @@
     .ip-address
       = t("surveillance.attempts.last_answered_section")
       \:
-      %strong= survey.sections[attempt.last_answered_section].title
+      %strong
+        - if (last_answered_section = survey.sections[attempt.last_answered_section])
+          = last_answered_section.title
+        - else
+          = t("surveillance.attempts.no_last_answered_section")
+
 
   %hr
 
