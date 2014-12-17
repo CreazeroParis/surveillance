@@ -6,7 +6,8 @@ module Surveillance
       def new
         self.attempt = if previous_attempt
           if previous_attempt.completed?
-            attempt_already_completed!(previous_attempt) and return
+            attempt_already_completed!(previous_attempt)
+            return
           end
           flash[:success] = t("surveillance.attempts.previous_attempt_recovered")
           previous_attempt
