@@ -3,6 +3,10 @@
     = "*" if question.mandatory
     = question.title.html_safe
 
+  - if question.description.presence
+    %p.help-block
+      = question.description.html_safe
+
 .survey-order-field
   - question.questions.each_with_index do |sub_question, index|
     = f.fields_for :answers, (sub_question.field.answer_or_initialize_for(f.object)) do |fa|

@@ -3,6 +3,11 @@
     = "*" if question.mandatory
     = question.title.html_safe
 
+  - if question.description.presence
+    %p.help-block
+      = question.description.html_safe
+
+
   .form-controls
     %table.table.table-striped.table-bordered.table-rounded
       %tbody
