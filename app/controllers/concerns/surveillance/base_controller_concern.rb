@@ -23,5 +23,13 @@ module Surveillance
     def stong_parameters?
       defined?(ActiveModel::ForbiddenAttributesProtection)
     end
+
+    def surveys_root_path
+      if (config = Surveillance.surveys_root_path)
+        instance_exec(&config)
+      else
+        surveys_path
+      end
+    end
   end
 end

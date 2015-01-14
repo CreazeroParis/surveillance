@@ -27,10 +27,10 @@ module Surveillance
       def ensure_survey_available
         if !survey
           flash[:error] = t('surveillance.attempts.errors.no_survey_found')
-          redirect_to surveys_path
+          redirect_to surveys_root_path
         elsif survey.closed?
           flash[:error] = t('surveillance.attempts.errors.survey_closed')
-          redirect_to surveys_path
+          redirect_to surveys_root_path
         end
       end
     end

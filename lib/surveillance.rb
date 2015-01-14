@@ -28,6 +28,9 @@ module Surveillance
   mattr_accessor :attempt_already_registered_callback
   @@attempt_already_registered_callback = nil
 
+  mattr_accessor :surveys_root_path
+  @@surveys_root_path = nil
+
   class << self
     def table_name_prefix
       'surveillance_'

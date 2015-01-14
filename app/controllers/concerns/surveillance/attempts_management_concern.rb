@@ -44,7 +44,7 @@ module Surveillance
         instance_exec(attempt, &callback)
       else
         flash[:error] = t("surveillance.attempts.errors.already_completed")
-        redirect_to surveys_path and return
+        redirect_to surveys_root_path and return
       end
     end
   end
