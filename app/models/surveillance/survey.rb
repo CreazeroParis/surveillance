@@ -27,10 +27,10 @@ module Surveillance
     }
 
     def closed?
-      end_date && end_date < Time.now.to_date
+      !published || (end_date && end_date < Time.now.to_date)
     end
 
-    def attempt_from_ip ip_address
+    def attempt_from_ip(ip_address)
       attempts.find_by_ip_address(ip_address)
     end
   end

@@ -25,8 +25,11 @@ module Surveillance
       end
 
       def survey_closed
-        if survey.closed?
-          flash[:error] = "Ce sondage est maintenant fermé"
+        if !survey
+          flash[:error] = t('surveillance.attempts.errors.no_survey_found')
+          redirect_to surveys_root_path
+        elsif survey.closed?
+          flash[:error] = t('surveillance.attempts.errors.survey_closed')
           redirect_to surveys_root_path
         end
       end
