@@ -98,6 +98,9 @@ fr:
       doesnt_answer: "ne répond pas à la question"
       answers_option: "choisi la réponse"
       doesnt_answer_option: "ne choisi pas la réponse"
+
+    surveys:
+      no_survey_available: "Aucun sondage n'est disponible pour le moment"
     attempts:
       step: "Étape %{step}"
       state: "Remplissage"
@@ -112,12 +115,15 @@ fr:
         already_completed: |
           Vous avez déjà rempli le questionnaire et vous ne pouvez le remplir
           qu'une seule fois. Merci pour votre participation !
+        no_survey_found: "Le sondage demandé n'a pas été trouvé, il n'existe pas ou plus"
+        survey_closed: "Le sondage demandé est maintenant fermé"
       previous_attempt_recovered: |
         Vous aviez déjà commencé à remplir le formulaire, il a donc été récupéré
         pour vous, vous pouvez le continuer directement.
 
     exports:
       results: "resultats-questionnaire-%{survey}"
+
 
   activerecord:
     attributes:

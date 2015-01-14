@@ -7,14 +7,15 @@ module Surveillance
       expose(:attempt, model: Surveillance::Attempt, attributes: :attempt_params,
         finder: :find_by_access_token)
 
-      before_filter :survey_closed
+      before_filter :ensure_survey_available
 
       private
 
       def survey
         @survey ||= begin
-          survey_id = params[:survey_id] || (attempt && attempt.survey_id)
-          Surveillance::Survey.includes_all.find(survey_id) if survey_id
+          if (survey_id = params[:survey_id] || (attempt && attempt.survey_id))
+            Surveillance::Survey.includes_all.where(id: survey_id).first
+          end
         end
       end
       helper_method :survey
@@ -23,9 +24,12 @@ module Surveillance
         stong_parameters? ? params.require(:attempt).permit! : params[:attempt]
       end
 
-      def survey_closed
-        if survey.closed?
-          flash[:error] = "Ce sondage est maintenant fermé"
+      def ensure_survey_available
+        if !survey
+          flash[:error] = t('surveillance.attempts.errors.no_survey_found')
+          redirect_to surveys_path
+        elsif survey.closed?
+          flash[:error] = t('surveillance.attempts.errors.survey_closed')
           redirect_to surveys_path
         end
       end

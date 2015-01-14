@@ -2,4 +2,7 @@
   Sondages
 
 .surveys-container
-  = render partial: "surveillance/surveys/survey", collection: surveys
+  - if surveys.length > 0
+    = render partial: "surveillance/surveys/survey", collection: surveys
+  - else
+    = t('surveillance.surveys.no_survey_available')
