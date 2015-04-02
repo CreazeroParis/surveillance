@@ -14,7 +14,7 @@ module Surveillance
 
         send_data(
           render_to_string(layout: false),
-          filename: "#{ t("surveillance.exports.results", survey: survey.title.to_param) }.xls",
+          filename: "#{ t("surveillance.exports.results", survey: survey.title.parameterize) }.xls",
           type: "application/xls",
           disposition: "attachment"
         )
