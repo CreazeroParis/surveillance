@@ -36,8 +36,7 @@
               = link_to admin_attempt_path(id: attempt.id), class: "btn btn-danger", data: { confirm: t("flashes.surveillance/admin/attempts.destroy.confirm_message"), method: "delete" } do
                 %i.fa.fa-times
                 Supprimer
-
-
+  = paginate attempts, theme: 'bootstrap3'
 
   #recap.tab-pane.fade
 

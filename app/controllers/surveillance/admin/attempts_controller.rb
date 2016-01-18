@@ -6,7 +6,7 @@ module Surveillance
       expose(:attempt,  model: Surveillance::Attempt, attributes: :attempt_params)
 
       def index
-        self.attempts = attempts.includes_all
+        self.attempts = attempts.includes_all.page(params[:page])
         self.survey = Surveillance::Survey.all_with_answers.find(survey.id)
       end
 

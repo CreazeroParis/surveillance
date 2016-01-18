@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
   s.add_dependency "simple_form"
   s.add_dependency "state_machine"
   s.add_dependency "spreadsheet_on_rails"
+  s.add_dependency "kaminari"
 
   s.add_development_dependency "sqlite3"
 
