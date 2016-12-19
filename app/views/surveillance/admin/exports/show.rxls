@@ -17,12 +17,15 @@ questions = sections.reduce([]) do |headers, section|
   end
 end
 
-columns = [t("surveillance.attempts.state")] + questions.map(&:column_header)
+columns = [Surveillance::Attempt.human_attribute_name(:created_at), t("surveillance.attempts.state")] + questions.map(&:column_header)
 last_column_index = columns.length - 1
 
 @sheet.row(0).concat(columns)
 set_format(0, (0..last_column_index), :black_background)
-(0..last_column_index).each { |n| @sheet.column(n).width = 30 }
+# Column width
+@sheet.column(0).width = 25
+@sheet.column(1).width = 15
+(2..last_column_index).each { |n| @sheet.column(n).width = 25 }
 
 attempts.each_with_index do |attempt, index|
   row = index + 1
@@ -33,7 +36,7 @@ attempts.each_with_index do |attempt, index|
     end
   end
 
-  @sheet.row(row).concat([attempt.state_label] + answers)
+  @sheet.row(row).concat([l(attempt.created_at), attempt.state_label] + answers)
 end
 
 @sheet

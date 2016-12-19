@@ -156,3 +156,5 @@ fr:
         action: "Alors"
         section: "Page"
         option: "Réponse"
+      surveillance/attempt:
+        created_at: "Date de réponse"
