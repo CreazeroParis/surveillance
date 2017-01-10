@@ -1,7 +1,7 @@
-require "state_machine"
-
 module Surveillance
   class Attempt < ActiveRecord::Base
+    include AASM
+
     has_many :answers, class_name: "Surveillance::Answer",
       foreign_key: 'attempt_id', dependent: :destroy, inverse_of: :attempt,
       before_add: :set_attempt_on_answers
@@ -18,63 +18,43 @@ module Surveillance
 
     before_validation :ensure_access_token
     before_validation :filter_required_answers
+    before_save :fill, if: :answers_filled_and_empty?
 
-    state_machine :state, initial: :empty do
+    aasm column: :state do
+      state :empty, initial: true
+      state :partially_filled
+      state :completed
+
       event :fill do
-        transition empty: :partially_filled, partially_filled: same
+        transitions from: [:empty, :partially_filled], to: :partially_filled
       end
 
       event :complete do
-        transition all => :completed
-      end
-
-      state :empty do
-        before_save :fill, if: :answers_filled
-
-        def answers_filled
-          answers.length > 0
-        end
-      end
-
-      state :partially_filled do
-        def state_label
-          [
-            I18n.t("surveillance.attempts.states.#{ state_name }"),
-            I18n.t("surveillance.attempts.step", step: last_answered_section + 1),
-          ].join(" - ")
-        end
-      end
-
-      state all - [:partially_filled] do
-        def state_label
-          I18n.t("surveillance.attempts.states.#{ state_name }")
-        end
+        transitions from: [:empty, :partially_filled, :completed], to: :completed
       end
     end
 
-    def ensure_access_token
-      self.access_token ||= Surveillance.unique_token
+    def state_label
+      if partially_filled?
+        [
+          I18n.t("surveillance.attempts.states.#{ state_name }"),
+          I18n.t("surveillance.attempts.step", step: last_answered_section + 1),
+        ].join(" - ")
+      else
+        I18n.t("surveillance.attempts.states.#{ state_name }")
+      end
     end
 
-    def fill_section index, attributes
+    def fill_section(index, attributes)
       self.last_answered_section = index.to_i
       update_attributes(attributes)
-    end
-
-    def filter_required_answers
-      answers_to_delete = answers.reduce([]) do |delete, answer|
-        delete << answer unless sections_to_answer[answer.question.section.id]
-        delete
-      end
-
-      answers_to_delete.each { |answer| answers.delete(answer) }
     end
 
     def sections_to_answer
       @sections_to_answer ||= build_sections_to_answer_hash
     end
 
-    def answer_to question
+    def answer_to(question)
       id = question.kind_of?(Integer) ? question : question.id
       questions_answers[id]
     end
@@ -105,14 +85,30 @@ module Surveillance
 
     private
 
-    def set_attempt_on_answers answer
+    def set_attempt_on_answers(answer)
       answer.attempt = self
     end
 
+    def answers_filled_and_empty?
+      empty? && answers.length > 0
+    end
+
+    def ensure_access_token
+      self.access_token ||= Surveillance.unique_token
+    end
+
+    def filter_required_answers
+      answers_to_delete = answers.reduce([]) do |delete, answer|
+        delete << answer unless sections_to_answer[answer.question.section.id]
+        delete
+      end
+
+      answers_to_delete.each { |answer| answers.delete(answer) }
+    end
+
     def build_sections_to_answer_hash
-      @sections =
-        survey.sections.includes(questions: [:questions, :branch_rules])
-          .limit(last_answered_section + 1)
+      @sections = survey.sections.includes(questions: [:questions, :branch_rules])
+      @sections.limit(last_answered_section + 1) if last_answered_section
 
       # Prepare sections to answer hash, with each section needing to be
       # answered by default

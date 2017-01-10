@@ -1,0 +1,4 @@
+= f.fields_for :answers, question.field.answer_or_initialize do |fa|
+  = fa.input :answer, label: question.title.html_safe, required: question.mandatory, hint: question.description do
+    = fa.select :option_id, question.field.options_for_select, { include_blank: true }, class: 'form-control'
+    = fa.hidden_field :question_id, value: question.id if fa.object.new_record?

@@ -13,8 +13,5 @@
 //= require       jquery_ujs
 //= require       ./vendor/underscore.min
 //= require       ./vendor/backbone.min
-//= require       ./form
-//= require_tree  ./models
-//= require_tree  ./collections
-//= require_tree  ./views
+//= require       ./manifest
 //= require_tree  ./admin

@@ -1,11 +1,13 @@
-require "decent_exposure"
-require "haml-rails"
-require "jquery-rails"
-require "simple_form"
-require "spreadsheet_on_rails"
-
 module Surveillance
   class Engine < ::Rails::Engine
     isolate_namespace Surveillance
+
+    config.to_prepare do
+      path = Rails.root.join('lib', 'decorators', 'surveillance', '**', '*.rb')
+
+      Dir[path].each do |file|
+        load file
+      end
+    end
   end
 end

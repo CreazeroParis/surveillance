@@ -1,3 +1,10 @@
+require "decent_exposure"
+require "haml-rails"
+require "jquery-rails"
+require "simple_form"
+require "spreadsheet_on_rails"
+require 'aasm'
+
 require "surveillance/engine"
 
 module Surveillance

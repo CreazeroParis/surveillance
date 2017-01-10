@@ -1,0 +1,13 @@
+.question
+  %span.title
+    = question.title.html_safe
+
+  %strong.answer
+    - field = question.field
+    - answer = field.answer
+
+    - if answer && answer.option
+      = answer.option.title
+    - else
+      Non répondu
+

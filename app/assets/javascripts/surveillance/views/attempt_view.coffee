@@ -5,7 +5,9 @@ class Surveillance.AttemptView extends Backbone.View
     @lastAnsweredSection = @$lastAnsweredSectionField.val()
 
     # Locks submissions from "Enter" key in text fields
-    @allowSubmission = false
+    # If the form has a `[data-surveillance-full-form]` attribute set, it can
+    # be submitted at any time
+    @allowSubmission = !!@$el.data('surveillance-full-form')
     @$el.on("submit", _.bind(@ensureSubmissionAllowed, this))
 
     @sectionViews = _.map @$(".survey-section"), (el) =>

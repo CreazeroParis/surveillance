@@ -1,0 +1,14 @@
+%h4= question.title.html_safe
+%table.table.table-striped.table-bordered.table-rounded
+  %thead
+    %tr
+      %th Option
+      %th Nombre de réponses
+
+  %tbody
+    - question.options.each do |option|
+      %tr
+        %td= option.title
+        %td
+          %label
+            = option.answers_for(question).length

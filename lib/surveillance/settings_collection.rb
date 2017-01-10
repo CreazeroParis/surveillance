@@ -10,7 +10,7 @@ module Surveillance
       end
     end
 
-    def respond_to?(name, include_private = false)
+    def respond_to?(method, include_private = false)
       (method.to_s =~ /=$/ || key?(method)) ? true : super
     end
   end

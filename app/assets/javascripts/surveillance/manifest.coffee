@@ -1,3 +1,5 @@
+# [DEPRECATED] Here for backwards compatibility
+#
 #= require      ./vendor/jquery-ui-sortable
 #= require      ./form
 #= require_tree ./models

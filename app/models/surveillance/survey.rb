@@ -2,6 +2,7 @@ module Surveillance
   class Survey < ActiveRecord::Base
     has_many :sections, -> { ordered }, foreign_key: "survey_id",
       dependent: :destroy, inverse_of: :survey
+    accepts_nested_attributes_for :sections, allow_destroy: true
 
     has_many :questions, through: :sections
 

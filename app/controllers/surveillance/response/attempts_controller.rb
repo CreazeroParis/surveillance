@@ -9,10 +9,11 @@ module Surveillance
             attempt_already_completed!(previous_attempt)
             return
           end
+
           flash[:success] = t("surveillance.attempts.previous_attempt_recovered")
           previous_attempt
         else
-          Surveillance::Attempt.create(
+          Surveillance::Attempt.create!(
             last_answered_section: -1,
             ip_address: request.remote_ip,
             survey: survey
