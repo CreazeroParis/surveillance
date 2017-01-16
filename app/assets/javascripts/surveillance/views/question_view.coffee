@@ -9,16 +9,16 @@ class Surveillance.QuestionView extends Backbone.View
 
     @buildModel(required: @fieldRequired(), rules: @branchRules())
 
-    @processAnswerValues()
+    @processAnswerValues(cleanErrors: false)
 
     @listenTo(@model, "invalid", @refreshErrors)
 
-  processAnswerValues: ->
+  processAnswerValues: (options = {}) ->
     fields = @fieldValues()
     answers = @requiredAnswersCount()
 
     @model.set(fields: fields, fieldsToFill: answers)
-    @cleanErrors()
+    @cleanErrors() unless options.cleanErrors is false
 
     @afterAnswerValuesProcessing?()
 

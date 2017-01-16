@@ -1,5 +1,5 @@
 = f.fields_for :answers, question.field.answer_or_initialize do |fa|
-  = fa.input :answer, label: question.title.html_safe, required: question.mandatory, hint: question.description do
+  = fa.input :option, label: question.title.html_safe, required: question.mandatory, hint: question.description do
     - question.field.ordered_options.each do |option|
       %label.radio
         = fa.radio_button :option_id, option.id

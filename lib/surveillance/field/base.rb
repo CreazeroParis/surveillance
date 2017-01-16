@@ -88,7 +88,7 @@ module Surveillance
         "surveillance/field/shared/rules_form"
       end
 
-      def validate_answer answer
+      def validate_answer(answer)
         self.answer = answer
 
         if question.mandatory && empty?

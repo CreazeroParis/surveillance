@@ -17,7 +17,11 @@ module Surveillance
       end
 
       def validate_answer answer
-        super
+        self.answer = answer
+
+        if question.mandatory && empty?
+          answer.errors[:option] << I18n.t("errors.messages.empty")
+        end
 
         if other_choosed? && !answer.content
           answer.errors[:content] << I18n.t("errors.messages.empty")
