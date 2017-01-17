@@ -1,7 +1,7 @@
 module Surveillance
   module ApplicationHelper
     # Renders a form field for the given question
-    def survey_field_for builder, question, index
+    def survey_field_for(builder, question, index)
       question.field.attempt = builder.object
 
       field = capture do
