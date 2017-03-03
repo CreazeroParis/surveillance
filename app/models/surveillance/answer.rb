@@ -3,8 +3,8 @@ module Surveillance
     belongs_to :attempt, class_name: "Surveillance::Attempt", inverse_of: :answers
     belongs_to :question, class_name: "Surveillance::Question"
 
-    has_and_belongs_to_many :options, class_name: "Surveillance::Option",
-      join_table: "surveillance_answers_options"
+    has_many :answers_options
+    has_many :options, through: :answers_options
 
     has_one :content, class_name: "Surveillance::AnswerContent",
       foreign_key: :answer_id
@@ -30,12 +30,15 @@ module Surveillance
       ids = ids.reduce([]) do |ids_list, id|
         case id
         when "other" then self.other_choosed = true
-        when /^\d+$/ then ids_list << id
+        when /^\d+$/ then ids_list << id.to_i
         end
         ids_list
       end
 
-      options.clear if options.length > 0
+      options.dup.each do |option|
+        options.delete(option) unless option.id.in? ids
+      end
+
       super(ids)
     end
 

@@ -1,7 +1,8 @@
 module Surveillance
   class Option < ActiveRecord::Base
-    has_and_belongs_to_many :answers, class_name: "Surveillance::Answer",
-      join_table: "surveillance_answers_options"
+
+    has_many :answers_options
+    has_many :answers, through: :answers_options
 
     belongs_to :question, class_name: "Surveillance::Question"
 
